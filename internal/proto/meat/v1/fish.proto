@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+package meat.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/meat/v1";
+
+// The FishService service definition.
+service FishService {
+  rpc CreateFishDespatchAdviceLineItemExtension(CreateFishDespatchAdviceLineItemExtensionRequest) returns (CreateFishDespatchAdviceLineItemExtensionResponse);
+  rpc CreateFishCatchOrProduction(CreateFishCatchOrProductionRequest) returns (CreateFishCatchOrProductionResponse);
+  rpc CreateFishCatchOrProductionDate(CreateFishCatchOrProductionDateRequest) returns (CreateFishCatchOrProductionDateResponse);
+}
+
+message FishDespatchAdviceLineItemExtension {
+  FishDespatchAdviceLineItemExtensionD fish_despatch_advice_line_item_extension_d = 1;
+  FishDespatchAdviceLineItemExtensionT fish_despatch_advice_line_item_extension_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message FishDespatchAdviceLineItemExtensionD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string aquatic_species_code = 4;
+  string aquatic_species_name = 5;
+  string fish_presentation_code = 6;
+  string fp_code_list_agency_name = 7;
+  string fp_code_list_version = 8;
+  string fp_code_list_name = 9;
+  string fish_size_code = 10;
+  string fs_code_list_agency_name = 11;
+  string fs_code_list_version = 12;
+  string fs_code_list_name = 13;
+  string quality_grade_code = 14;
+  string qg_code_list_agency_name = 15;
+  string qg_code_list_version = 16;
+  string qg_code_list_name = 17;
+  string storage_state_code = 18;
+  uint32 aqua_culture_production_unit = 19;
+  uint32 fishing_vessel = 20;
+  uint32 place_of_slaughter = 21;
+  uint32 port_of_landing = 22;
+  uint32 fish_catch_or_production_date_id = 23;
+  uint32 fish_catch_or_production_id = 24;
+}
+
+message FishDespatchAdviceLineItemExtensionT {
+  google.protobuf.Timestamp date_of_landing = 1;
+  google.protobuf.Timestamp date_of_slaughter = 2;
+}
+
+message CreateFishDespatchAdviceLineItemExtensionRequest {
+  string aquatic_species_code = 1;
+  string aquatic_species_name = 2;
+  string fish_presentation_code = 3;
+  string fp_code_list_agency_name = 4;
+  string fp_code_list_version = 5;
+  string fp_code_list_name = 6;
+  string fish_size_code = 7;
+  string fs_code_list_agency_name = 8;
+  string fs_code_list_version = 9;
+  string fs_code_list_name = 10;
+  string quality_grade_code = 11;
+  string qg_code_list_agency_name = 12;
+  string qg_code_list_version = 13;
+  string qg_code_list_name = 14;
+  string storage_state_code = 15;
+  uint32 aqua_culture_production_unit = 16;
+  string date_of_landing = 17;
+  string date_of_slaughter = 18;
+  uint32 fishing_vessel = 19;
+  uint32 place_of_slaughter = 20;
+  uint32 port_of_landing = 21;
+  uint32 fish_catch_or_production_date_id = 22;
+  uint32 fish_catch_or_production_id = 23;
+  string user_id = 24;
+  string user_email = 25;
+  string request_id = 26;
+}
+
+message CreateFishDespatchAdviceLineItemExtensionResponse {
+  FishDespatchAdviceLineItemExtension fish_despatch_advice_line_item_extension = 1;
+}
+
+message FishCatchOrProduction {
+  uint32 id = 1;
+  string catch_area = 2;
+  string fishing_gear_type_code = 3;
+  string production_method_for_fish_and_seafood_code = 4;
+}
+
+message CreateFishCatchOrProductionRequest {
+  string catch_area = 1;
+  string fishing_gear_type_code = 2;
+  string production_method_for_fish_and_seafood_code = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateFishCatchOrProductionResponse {
+  FishCatchOrProduction fish_catch_or_production = 1;
+}
+
+message FishCatchOrProductionDate {
+  FishCatchOrProductionDateD fish_catch_or_production_date_d = 1;
+  FishCatchOrProductionDateT fish_catch_or_production_date_t = 2;
+}
+
+message FishCatchOrProductionDateD {
+  uint32 id = 1;
+}
+
+message FishCatchOrProductionDateT {
+  google.protobuf.Timestamp catch_end_date = 1;
+  google.protobuf.Timestamp catch_start_date = 2;
+  google.protobuf.Timestamp first_freeze_date = 3;
+  google.protobuf.Timestamp catch_date_time = 4;
+}
+
+message CreateFishCatchOrProductionDateRequest {
+  string catch_end_date = 1;
+  string catch_start_date = 2;
+  string first_freeze_date = 3;
+  string catch_date_time = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateFishCatchOrProductionDateResponse {
+  FishCatchOrProductionDate fish_catch_or_production_date = 1;
+}

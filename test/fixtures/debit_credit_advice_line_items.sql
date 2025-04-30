@@ -1,0 +1,31 @@
+INSERT INTO `debit_credit_advice_line_items`(
+  uuid4,
+  adjustment_amount,
+  aa_code_list_version,
+  aa_currency_code,
+  debit_credit_indicator_code,
+  financial_adjustment_reason_code,
+  line_item_number,
+  parent_line_item_number,
+  debit_credit_advice_id,
+  status_code,
+  created_by_user_id,
+  updated_by_user_id,
+  created_at,
+  updated_at
+) VALUES (
+  UNHEX(REPLACE('3587bef1-9bda-4ca2-b322-303890f539a0','-','')),
+  100,
+  '',
+  'EUR',
+  'CREDIT',
+  '17',
+  1,
+  0,
+  1,  
+  'active',
+  'auth0|673ee1a719dd4000cd5a3832',
+  'auth0|673ee1a719dd4000cd5a3832',
+  '2011-04-11 10:04:26',
+  '2011-04-11 10:04:26' 
+);

@@ -1,0 +1,63 @@
+INSERT INTO `logistics_inventory_reports`(
+  uuid4,
+  structure_type_code,
+  type_of_service_transaction,
+  inventory_reporting_party,
+  inventory_report_to_party,
+  logistics_inventory_report_identification,
+  logistics_inventory_report_request,
+  reporting_period_begin,
+  reporting_period_end,
+  status_code,
+  created_by_user_id,
+  updated_by_user_id,
+  created_at,
+  updated_at
+) VALUES (
+  UNHEX(REPLACE('6227e254-7ed1-4b33-bdfe-1b22c8e10629','-','')),
+  'LOCATION_BY_ITEM',
+  '',
+  5,
+  6,
+  0,
+  0,
+  '2012-07-11 12:20:00',
+  '2012-08-13 12:20:00',
+  'active',
+  'auth0|673ee1a719dd4000cd5a3832',
+  'auth0|673ee1a719dd4000cd5a3832',
+  '2012-07-11 12:20:00',
+  '2012-07-11 12:20:00'
+);
+
+INSERT INTO `logistics_inventory_reports`(
+  uuid4,
+  structure_type_code,
+  type_of_service_transaction,
+  inventory_reporting_party,
+  inventory_report_to_party,
+  logistics_inventory_report_identification,
+  logistics_inventory_report_request,
+  reporting_period_begin,
+  reporting_period_end,
+  status_code,
+  created_by_user_id,
+  updated_by_user_id,
+  created_at,
+  updated_at
+) VALUES (
+  UNHEX(REPLACE('4c082102-c6d2-4f5f-b6c3-b4d24a5432b4','-','')),
+  'TRADE_ITEM_REPORT',
+  '',
+  6,
+  5,
+  0,
+  0,
+  '2012-07-01 00:00:00',
+  '2012-08-01 00:00:00',
+  'active',
+  'auth0|673ee1a719dd4000cd5a3832',
+  'auth0|673ee1a719dd4000cd5a3832',
+  '2012-07-11 12:20:00',
+  '2012-07-11 12:20:00'
+);

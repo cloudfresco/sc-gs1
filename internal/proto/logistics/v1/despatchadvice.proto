@@ -1,0 +1,480 @@
+syntax = "proto3";
+
+package logistics.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/logistics/v1";
+
+// The DespatchAdviceService service definition.
+service DespatchAdviceService {
+  rpc CreateDespatchAdvice(CreateDespatchAdviceRequest) returns (CreateDespatchAdviceResponse);
+  rpc GetDespatchAdvices(GetDespatchAdvicesRequest) returns (GetDespatchAdvicesResponse);
+  rpc GetDespatchAdvice(GetDespatchAdviceRequest) returns (GetDespatchAdviceResponse);
+  rpc GetDespatchAdviceByPk(GetDespatchAdviceByPkRequest) returns (GetDespatchAdviceByPkResponse);
+  rpc UpdateDespatchAdvice(UpdateDespatchAdviceRequest) returns (UpdateDespatchAdviceResponse);
+  rpc CreateDespatchAdviceLineItem(CreateDespatchAdviceLineItemRequest) returns (CreateDespatchAdviceLineItemResponse);
+  rpc GetDespatchAdviceLineItems(GetDespatchAdviceLineItemsRequest) returns (GetDespatchAdviceLineItemsResponse);
+  rpc CreateDespatchAdviceItemTotal(CreateDespatchAdviceItemTotalRequest) returns (CreateDespatchAdviceItemTotalResponse);
+  rpc CreateDespatchAdviceLogisticUnit(CreateDespatchAdviceLogisticUnitRequest) returns (CreateDespatchAdviceLogisticUnitResponse);
+  rpc CreateDespatchAdviceQuantityVariance(CreateDespatchAdviceQuantityVarianceRequest) returns (CreateDespatchAdviceQuantityVarianceResponse);
+  rpc CreateDespatchAdviceTotal(CreateDespatchAdviceTotalRequest) returns (CreateDespatchAdviceTotalResponse);
+  rpc CreateDespatchAdviceTransportInformation(CreateDespatchAdviceTransportInformationRequest) returns (CreateDespatchAdviceTransportInformationResponse);
+  rpc CreateDespatchInformation(CreateDespatchInformationRequest) returns (CreateDespatchInformationResponse);
+}
+
+message DespatchAdvice {
+  DespatchAdviceD despatch_advice_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message DespatchAdviceD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string delivery_type_code = 4;
+  string rack_id_at_pick_up_location = 5;
+  double total_deposit_amount = 6;
+  string tda_code_list_version = 7;
+  string tda_currency_code = 8;
+  uint32 total_number_of_lines = 9;
+  uint32 blanket_order = 10;
+  uint32 buyer = 11;
+  uint32 carrier = 12;
+  uint32 contract = 13;
+  uint32 customer_document_reference = 14;
+  uint32 declarants_customs_identity = 15;
+  uint32 delivery_note = 16;
+  uint32 delivery_schedule = 17;
+  uint32 despatch_advice_identification = 18;
+  uint32 freight_forwarder = 19;
+  uint32 inventory_location = 20;
+  uint32 invoice = 21;
+  uint32 invoicee = 22;
+  uint32 logistic_service_provider = 23;
+  uint32 order_response = 24;
+  uint32 pick_up_location = 25;
+  uint32 product_certification = 26;
+  uint32 promotional_deal = 27;
+  uint32 purchase_conditions = 28;
+  uint32 purchase_order = 29;
+  uint32 receiver = 30;
+  uint32 returns_instruction = 31;
+  uint32 seller = 32;
+  uint32 ship_from = 33;
+  uint32 shipper = 34;
+  uint32 ship_to = 35;
+  uint32 specification = 36;
+  uint32 transport_instruction = 37;
+  uint32 ultimate_consignee = 38;
+}
+
+message CreateDespatchAdviceRequest {
+  string delivery_type_code = 1;
+  string rack_id_at_pick_up_location = 2;
+  double total_deposit_amount = 3;
+  string tda_code_list_version = 4;
+  string tda_currency_code = 5;
+  uint32 total_number_of_lines = 6;
+  uint32 blanket_order = 7;
+  uint32 buyer = 8;
+  uint32 carrier = 9;
+  uint32 contract = 10;
+  uint32 customer_document_reference = 11;
+  uint32 declarants_customs_identity = 12;
+  uint32 delivery_note = 13;
+  uint32 delivery_schedule = 14;
+  uint32 despatch_advice_identification = 15;
+  uint32 freight_forwarder = 16;
+  uint32 inventory_location = 17;
+  uint32 invoice = 18;
+  uint32 invoicee = 19;
+  uint32 logistic_service_provider = 20;
+  uint32 order_response = 21;
+  uint32 pick_up_location = 22;
+  uint32 product_certification = 23;
+  uint32 promotional_deal = 24;
+  uint32 purchase_conditions = 25;
+  uint32 purchase_order = 26;
+  uint32 receiver = 27;
+  uint32 returns_instruction = 28;
+  uint32 seller = 29;
+  uint32 ship_from = 30;
+  uint32 shipper = 31;
+  uint32 ship_to = 32;
+  uint32 specification = 33;
+  uint32 transport_instruction = 34;
+  uint32 ultimate_consignee = 35;
+  string user_id = 36;
+  string user_email = 37;
+  string request_id = 38;
+}
+
+message CreateDespatchAdviceResponse {
+  DespatchAdvice despatch_advice = 1;
+}
+
+message GetDespatchAdviceRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetDespatchAdviceResponse {
+  DespatchAdvice despatch_advice = 1;
+}
+
+message GetDespatchAdviceByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetDespatchAdviceByPkResponse {
+  DespatchAdvice despatch_advice = 1;
+}
+
+message GetDespatchAdvicesResponse {
+  repeated DespatchAdvice despatch_advices = 1;
+  string next_cursor = 2;
+}
+
+message GetDespatchAdvicesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message UpdateDespatchAdviceRequest {
+  string delivery_type_code = 1;
+  string rack_id_at_pick_up_location = 2;
+  double total_deposit_amount = 3;
+  string tda_code_list_version = 4;
+  string tda_currency_code = 5;
+  uint32 total_number_of_lines = 6;
+  string id = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message UpdateDespatchAdviceResponse {}
+
+message DespatchAdviceLineItem {
+  DespatchAdviceLineItemD despatch_advice_line_item_d = 1;
+  DespatchAdviceLineItemT despatch_advice_line_item_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message DespatchAdviceLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  double actual_processed_quantity = 4;
+  string measurement_unit_code = 5;
+  string code_list_version = 6;
+  string country_of_last_processing = 7;
+  string country_of_origin = 8;
+  double despatched_quantity = 9;
+  string dq_measurement_unit_code = 10;
+  string dq_code_list_version = 11;
+  string duty_fee_tax_liability = 12;
+  string extension = 13;
+  double free_goods_quantity = 14;
+  string fgq_measurement_unit_code = 15;
+  string fgq_code_list_version = 16;
+  string handling_instruction_code = 17;
+  string has_item_been_scanned_at_pos = 18;
+  string inventory_status_type = 19;
+  uint32 line_item_number = 20;
+  uint32 parent_line_item_number = 21;
+  double requested_quantity = 22;
+  string rq_measurement_unit_code = 23;
+  string rq_code_list_version = 24;
+  uint32 contract = 25;
+  uint32 coupon_clearing_house = 26;
+  uint32 customer = 27;
+  uint32 customer_document_reference = 28;
+  uint32 customer_reference = 29;
+  uint32 delivery_note = 30;
+  uint32 item_owner = 31;
+  uint32 original_supplier = 32;
+  uint32 product_certification = 33;
+  uint32 promotional_deal = 34;
+  uint32 purchase_conditions = 35;
+  uint32 purchase_order = 36;
+  uint32 referenced_consignment = 37;
+  uint32 requested_item_identification = 38;
+  uint32 specification = 39;
+  uint32 despatch_advice_id = 40;
+}
+
+message DespatchAdviceLineItemT {
+  google.protobuf.Timestamp first_in_first_out_date_time = 1;
+  google.protobuf.Timestamp pick_up_date_time = 2;
+}
+
+message CreateDespatchAdviceLineItemRequest {
+  double actual_processed_quantity = 1;
+  string measurement_unit_code = 2;
+  string code_list_version = 3;
+  string country_of_last_processing = 4;
+  string country_of_origin = 5;
+  double despatched_quantity = 6;
+  string dq_measurement_unit_code = 7;
+  string dq_code_list_version = 8;
+  string duty_fee_tax_liability = 9;
+  string extension = 10;
+  string first_in_first_out_date_time = 11;
+  double free_goods_quantity = 12;
+  string fgq_measurement_unit_code = 13;
+  string fgq_code_list_version = 14;
+  string handling_instruction_code = 15;
+  string has_item_been_scanned_at_pos = 16;
+  string inventory_status_type = 17;
+  uint32 line_item_number = 18;
+  uint32 parent_line_item_number = 19;
+  string pick_up_date_time = 20;
+  double requested_quantity = 21;
+  string rq_measurement_unit_code = 22;
+  string rq_code_list_version = 23;
+  uint32 contract = 24;
+  uint32 coupon_clearing_house = 25;
+  uint32 customer = 26;
+  uint32 customer_document_reference = 27;
+  uint32 customer_reference = 28;
+  uint32 delivery_note = 29;
+  uint32 item_owner = 30;
+  uint32 original_supplier = 31;
+  uint32 product_certification = 32;
+  uint32 promotional_deal = 33;
+  uint32 purchase_conditions = 34;
+  uint32 purchase_order = 35;
+  uint32 referenced_consignment = 36;
+  uint32 requested_item_identification = 37;
+  uint32 specification = 38;
+  uint32 despatch_advice_id = 39;
+  string user_id = 40;
+  string user_email = 41;
+  string request_id = 42;
+}
+
+message CreateDespatchAdviceLineItemResponse {
+  DespatchAdviceLineItem despatch_advice_line_item = 1;
+}
+
+message GetDespatchAdviceLineItemsRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetDespatchAdviceLineItemsResponse {
+  repeated DespatchAdviceLineItem despatch_advice_line_items = 1;
+}
+
+message DespatchAdviceItemTotal {
+  string additional_trade_item_identification = 1;
+  string additional_trade_item_identification_type_code = 2;
+  string code_list_version = 3;
+  uint32 gtin = 4;
+  uint32 trade_item_identification = 5;
+  uint32 despatch_advice_id = 6;
+  uint32 despatch_advice_line_item_id = 7;
+}
+
+message CreateDespatchAdviceItemTotalRequest {
+  string additional_trade_item_identification = 1;
+  string additional_trade_item_identification_type_code = 2;
+  string code_list_version = 3;
+  uint32 gtin = 4;
+  uint32 trade_item_identification = 5;
+  uint32 despatch_advice_id = 6;
+  uint32 despatch_advice_line_item_id = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message CreateDespatchAdviceItemTotalResponse {
+  DespatchAdviceItemTotal despatch_advice_item_total = 1;
+}
+
+message DespatchAdviceLogisticUnit {
+  DespatchAdviceLogisticUnitD despatch_advice_logistic_unit_d = 1;
+  DespatchAdviceLogisticUnitT despatch_advice_logistic_unit_t = 2;
+}
+
+message DespatchAdviceLogisticUnitD {
+  string additional_logisitic_unit_identification = 1;
+  string additional_logistic_unit_identification_type_code = 2;
+  string code_list_version = 3;
+  string sscc = 4;
+  uint32 ultimate_consignee = 5;
+  uint32 despatch_advice_id = 6;
+}
+
+message DespatchAdviceLogisticUnitT {
+  google.protobuf.Timestamp estimated_delivery_date_time_at_ultimate_consignee = 1;
+}
+
+message CreateDespatchAdviceLogisticUnitRequest {
+  string estimated_delivery_date_time_at_ultimate_consignee = 1;
+  string additional_logisitic_unit_identification = 2;
+  string additional_logistic_unit_identification_type_code = 3;
+  string code_list_version = 4;
+  string sscc = 5;
+  uint32 ultimate_consignee = 6;
+  uint32 despatch_advice_id = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message CreateDespatchAdviceLogisticUnitResponse {
+  DespatchAdviceLogisticUnit despatch_advice_logistic_unit = 1;
+}
+
+message DespatchAdviceQuantityVariance {
+  DespatchAdviceQuantityVarianceD despatch_advice_quantity_variance_d = 1;
+  DespatchAdviceQuantityVarianceT despatch_advice_quantity_variance_t = 2;
+}
+
+message DespatchAdviceQuantityVarianceD {
+  string remaining_quantity_status_code = 1;
+  double variance_quantity = 2;
+  string vq_measurement_unit_code = 3;
+  string vq_code_list_version = 4;
+  string variance_reason_code = 5;
+  uint32 despatch_advice_id = 6;
+}
+
+message DespatchAdviceQuantityVarianceT {
+  google.protobuf.Timestamp delivery_date_variance = 1;
+}
+
+message CreateDespatchAdviceQuantityVarianceRequest {
+  string delivery_date_variance = 1;
+  string remaining_quantity_status_code = 2;
+  double variance_quantity = 3;
+  string vq_measurement_unit_code = 4;
+  string vq_code_list_version = 5;
+  string variance_reason_code = 6;
+  uint32 despatch_advice_id = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message CreateDespatchAdviceQuantityVarianceResponse {
+  DespatchAdviceQuantityVariance despatch_advice_quantity_variance = 1;
+}
+
+message DespatchAdviceTotal {
+  string measurement_type = 1;
+  string measurement_value = 2;
+  uint32 package_total = 3;
+  uint32 despatch_advice_id = 4;
+}
+
+message CreateDespatchAdviceTotalRequest {
+  string measurement_type = 1;
+  string measurement_value = 2;
+  uint32 package_total = 3;
+  uint32 despatch_advice_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateDespatchAdviceTotalResponse {
+  DespatchAdviceTotal despatch_advice_total = 1;
+}
+
+message DespatchAdviceTransportInformation {
+  uint32 route_id = 1;
+  uint32 transport_means_id = 2;
+  string transport_means_name = 3;
+  string transport_means_type = 4;
+  string transport_mode_code = 5;
+  uint32 bill_of_lading_number = 6;
+  string additional_consignment_identification = 7;
+  string additional_consignment_identification_type_code = 8;
+  string code_list_version = 9;
+  string ginc = 10;
+  uint32 driver = 11;
+  uint32 driver_id = 12;
+  uint32 receiver = 13;
+  uint32 receiver_id = 14;
+  string additional_shipment_identification = 15;
+  string additional_shipment_identification_type_code = 16;
+  string gsin = 17;
+  uint32 despatch_advice_id = 18;
+}
+
+message CreateDespatchAdviceTransportInformationRequest {
+  uint32 route_id = 1;
+  uint32 transport_means_id = 2;
+  string transport_means_name = 3;
+  string transport_means_type = 4;
+  string transport_mode_code = 5;
+  uint32 bill_of_lading_number = 6;
+  string additional_consignment_identification = 7;
+  string additional_consignment_identification_type_code = 8;
+  string code_list_version = 9;
+  string ginc = 10;
+  uint32 driver = 11;
+  uint32 driver_id = 12;
+  uint32 receiver = 13;
+  uint32 receiver_id = 14;
+  string additional_shipment_identification = 15;
+  string additional_shipment_identification_type_code = 16;
+  string gsin = 17;
+  uint32 despatch_advice_id = 18;
+  string user_id = 19;
+  string user_email = 20;
+  string request_id = 21;
+}
+
+message CreateDespatchAdviceTransportInformationResponse {
+  DespatchAdviceTransportInformation despatch_advice_transport_information = 1;
+}
+
+message DespatchInformation {
+  DespatchInformationD despatch_information_d = 1;
+  DespatchInformationT despatch_information_t = 2;
+}
+
+message DespatchInformationD {
+  uint32 despatch_advice_id = 1;
+}
+
+message DespatchInformationT {
+  google.protobuf.Timestamp actual_ship_date_time = 1;
+  google.protobuf.Timestamp despatch_date_time = 2;
+  google.protobuf.Timestamp estimated_delivery_date_time = 3;
+  google.protobuf.Timestamp estimated_delivery_date_time_at_ultimate_consignee = 4;
+  google.protobuf.Timestamp loading_date_time = 5;
+  google.protobuf.Timestamp pick_up_date_time = 6;
+  google.protobuf.Timestamp release_date_time_of_supplier = 7;
+  google.protobuf.Timestamp estimated_delivery_period_begin = 8;
+  google.protobuf.Timestamp estimated_delivery_period_end = 9;
+}
+
+message CreateDespatchInformationRequest {
+  string actual_ship_date_time = 1;
+  string despatch_date_time = 2;
+  string estimated_delivery_date_time = 3;
+  string estimated_delivery_date_time_at_ultimate_consignee = 4;
+  string loading_date_time = 5;
+  string pick_up_date_time = 6;
+  string release_date_time_of_supplier = 7;
+  string estimated_delivery_period_begin = 8;
+  string estimated_delivery_period_end = 9;
+  uint32 despatch_advice_id = 10;
+  string user_id = 11;
+  string user_email = 12;
+  string request_id = 13;
+}
+
+message CreateDespatchInformationResponse {
+  DespatchInformation despatch_information = 1;
+}

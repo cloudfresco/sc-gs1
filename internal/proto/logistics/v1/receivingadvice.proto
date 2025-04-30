@@ -1,0 +1,254 @@
+syntax = "proto3";
+
+package logistics.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/logistics/v1";
+
+// The ReceivingAdviceService service definition.
+service ReceivingAdviceService {
+  rpc CreateReceivingAdvice(CreateReceivingAdviceRequest) returns (CreateReceivingAdviceResponse);
+  rpc GetReceivingAdvices(GetReceivingAdvicesRequest) returns (GetReceivingAdvicesResponse);
+  rpc GetReceivingAdvice(GetReceivingAdviceRequest) returns (GetReceivingAdviceResponse);
+  rpc GetReceivingAdviceByPk(GetReceivingAdviceByPkRequest) returns (GetReceivingAdviceByPkResponse);
+  rpc UpdateReceivingAdvice(UpdateReceivingAdviceRequest) returns (UpdateReceivingAdviceResponse);
+  rpc CreateReceivingAdviceLineItem(CreateReceivingAdviceLineItemRequest) returns (CreateReceivingAdviceLineItemResponse);
+  rpc GetReceivingAdviceLineItems(GetReceivingAdviceLineItemsRequest) returns (GetReceivingAdviceLineItemsResponse);
+}
+
+message ReceivingAdvice {
+  ReceivingAdviceD receiving_advice_d = 1;
+  ReceivingAdviceT receiving_advice_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message ReceivingAdviceD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string reporting_code = 4;
+  double total_accepted_amount = 5;
+  string taa_code_list_version = 6;
+  string taa_currency_code = 7;
+  double total_deposit_amount = 8;
+  string tda_code_list_version = 9;
+  string tda_currency_code = 10;
+  uint32 total_number_of_lines = 11;
+  double total_on_hold_amount = 12;
+  string toha_code_list_version = 13;
+  string toha_currency_code = 14;
+  double total_rejected_amount = 15;
+  string tra_code_list_version = 16;
+  string tra_currency_code = 17;
+  uint32 receiving_advice_transport_information = 18;
+  uint32 bill_of_lading_number = 19;
+  uint32 buyer = 20;
+  uint32 carrier = 21;
+  uint32 consignment_identification = 22;
+  uint32 delivery_note = 23;
+  uint32 despatch_advice = 24;
+  uint32 inventory_location = 25;
+  uint32 purchase_order = 26;
+  uint32 receiver = 27;
+  uint32 receiving_advice_identification = 28;
+  uint32 seller = 29;
+  uint32 ship_from = 30;
+  uint32 shipment_identification = 31;
+  uint32 shipper = 32;
+  uint32 ship_to = 33;
+}
+
+message ReceivingAdviceT {
+  google.protobuf.Timestamp despatch_advice_delivery_date_time_begin = 1;
+  google.protobuf.Timestamp despatch_advice_delivery_date_time_end = 2;
+  google.protobuf.Timestamp payment_date_time_begin = 3;
+  google.protobuf.Timestamp payment_date_time_end = 4;
+  google.protobuf.Timestamp receiving_date_time_begin = 5;
+  google.protobuf.Timestamp receiving_date_time_end = 6;
+}
+
+message CreateReceivingAdviceRequest {
+  string despatch_advice_delivery_date_time_begin = 1;
+  string despatch_advice_delivery_date_time_end = 2;
+  string payment_date_time_begin = 3;
+  string payment_date_time_end = 4;
+  string receiving_date_time_begin = 5;
+  string receiving_date_time_end = 6;
+  string reporting_code = 7;
+  double total_accepted_amount = 8;
+  string taa_code_list_version = 9;
+  string taa_currency_code = 10;
+  double total_deposit_amount = 11;
+  string tda_code_list_version = 12;
+  string tda_currency_code = 13;
+  uint32 total_number_of_lines = 14;
+  double total_on_hold_amount = 15;
+  string toha_code_list_version = 16;
+  string toha_currency_code = 17;
+  double total_rejected_amount = 18;
+  string tra_code_list_version = 19;
+  string tra_currency_code = 20;
+  uint32 receiving_advice_transport_information = 21;
+  uint32 bill_of_lading_number = 22;
+  uint32 buyer = 23;
+  uint32 carrier = 24;
+  uint32 consignment_identification = 25;
+  uint32 delivery_note = 26;
+  uint32 despatch_advice = 27;
+  uint32 inventory_location = 28;
+  uint32 purchase_order = 29;
+  uint32 receiver = 30;
+  uint32 receiving_advice_identification = 31;
+  uint32 seller = 32;
+  uint32 ship_from = 33;
+  uint32 shipment_identification = 34;
+  uint32 shipper = 35;
+  uint32 ship_to = 36;
+  string user_id = 37;
+  string user_email = 38;
+  string request_id = 39;
+}
+
+message CreateReceivingAdviceResponse {
+  ReceivingAdvice receiving_advice = 1;
+}
+
+message GetReceivingAdviceRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetReceivingAdviceResponse {
+  ReceivingAdvice receiving_advice = 1;
+}
+
+message GetReceivingAdviceByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetReceivingAdviceByPkResponse {
+  ReceivingAdvice receiving_advice = 1;
+}
+
+message GetReceivingAdvicesResponse {
+  repeated ReceivingAdvice receiving_advices = 1;
+  string next_cursor = 2;
+}
+
+message GetReceivingAdvicesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message UpdateReceivingAdviceRequest {
+  string reporting_code = 1;
+  double total_accepted_amount = 2;
+  string taa_code_list_version = 3;
+  string taa_currency_code = 4;
+  double total_deposit_amount = 5;
+  string tda_code_list_version = 6;
+  string tda_currency_code = 7;
+  uint32 total_number_of_lines = 8;
+  double total_on_hold_amount = 9;
+  string toha_code_list_version = 10;
+  string toha_currency_code = 11;
+  double total_rejected_amount = 12;
+  string tra_code_list_version = 13;
+  string tra_currency_code = 14;
+  string id = 15;
+  string user_id = 16;
+  string user_email = 17;
+  string request_id = 18;
+}
+
+message UpdateReceivingAdviceResponse {}
+
+message ReceivingAdviceLineItem {
+  ReceivingAdviceLineItemD receiving_advice_line_item_d = 1;
+  ReceivingAdviceLineItemT receiving_advice_line_item_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message ReceivingAdviceLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 line_item_number = 4;
+  uint32 parent_line_item_number = 5;
+  double quantity_accepted = 6;
+  string qa_measurement_unit_code = 7;
+  string qa_code_list_version = 8;
+  double quantity_despatched = 9;
+  string qd_measurement_unit_code = 10;
+  string qd_code_list_version = 11;
+  double quantity_received = 12;
+  string qr_measurement_unit_code = 13;
+  string qr_code_list_version = 14;
+  uint32 transactional_trade_item = 15;
+  uint32 ecom_consignment_identification = 16;
+  uint32 contract = 17;
+  uint32 customer_reference = 18;
+  uint32 delivery_note = 19;
+  uint32 despatch_advice = 20;
+  uint32 product_certification = 21;
+  uint32 promotional_deal = 22;
+  uint32 purchase_conditions = 23;
+  uint32 purchase_order = 24;
+  uint32 requested_item_identification = 25;
+  uint32 specification = 26;
+  uint32 receiving_advice_id = 27;
+}
+
+message ReceivingAdviceLineItemT {
+  google.protobuf.Timestamp pick_up_date_time_begin = 1;
+  google.protobuf.Timestamp pick_up_date_time_end = 2;
+}
+
+message CreateReceivingAdviceLineItemRequest {
+  uint32 line_item_number = 1;
+  uint32 parent_line_item_number = 2;
+  string pick_up_date_time_begin = 3;
+  string pick_up_date_time_end = 4;
+  double quantity_accepted = 5;
+  string qa_measurement_unit_code = 6;
+  string qa_code_list_version = 7;
+  double quantity_despatched = 8;
+  string qd_measurement_unit_code = 9;
+  string qd_code_list_version = 10;
+  double quantity_received = 11;
+  string qr_measurement_unit_code = 12;
+  string qr_code_list_version = 13;
+  uint32 transactional_trade_item = 14;
+  uint32 ecom_consignment_identification = 15;
+  uint32 contract = 16;
+  uint32 customer_reference = 17;
+  uint32 delivery_note = 18;
+  uint32 despatch_advice = 19;
+  uint32 product_certification = 20;
+  uint32 promotional_deal = 21;
+  uint32 purchase_conditions = 22;
+  uint32 purchase_order = 23;
+  uint32 requested_item_identification = 24;
+  uint32 specification = 25;
+  uint32 receiving_advice_id = 26;
+  string user_id = 27;
+  string user_email = 28;
+  string request_id = 29;
+}
+
+message CreateReceivingAdviceLineItemResponse {
+  ReceivingAdviceLineItem receiving_advice_line_item = 1;
+}
+
+message GetReceivingAdviceLineItemsRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetReceivingAdviceLineItemsResponse {
+  repeated ReceivingAdviceLineItem receiving_advice_line_items = 1;
+}

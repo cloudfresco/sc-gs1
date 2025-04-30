@@ -1,0 +1,235 @@
+syntax = "proto3";
+
+package order.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/order/v1";
+
+// The OrderResponseService service definition.
+service OrderResponseService {
+  rpc CreateOrderResponse(CreateOrderResponseRequest) returns (CreateOrderResponseResponse);
+  rpc GetOrderResponses(GetOrderResponsesRequest) returns (GetOrderResponsesResponse);
+  rpc GetOrderResponse(GetOrderResponseRequest) returns (GetOrderResponseResponse);
+  rpc GetOrderResponseByPk(GetOrderResponseByPkRequest) returns (GetOrderResponseByPkResponse);
+  rpc UpdateOrderResponse(UpdateOrderResponseRequest) returns (UpdateOrderResponseResponse);
+  rpc CreateOrderResponseLineItem(CreateOrderResponseLineItemRequest) returns (CreateOrderResponseLineItemResponse);
+  rpc GetOrderResponseLineItems(GetOrderResponseLineItemsRequest) returns (GetOrderResponseLineItemsResponse);
+  rpc CreateOrderResponseLineItemDetail(CreateOrderResponseLineItemDetailRequest) returns (CreateOrderResponseLineItemDetailResponse);
+}
+
+message OrderResponse {
+  OrderResponseD order_response_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message OrderResponseD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string order_response_reason_code = 4;
+  string response_status_code = 5;
+  double total_monetary_amount_excluding_taxes = 6;
+  string tmaet_code_list_version = 7;
+  string tmaet_currency_code = 8;
+  double total_monetary_amount_including_taxes = 9;
+  string tmait_code_list_version = 10;
+  string tmait_currency_code = 11;
+  double total_tax_amount = 12;
+  string tta_code_list_version = 13;
+  string tta_currency_code = 14;
+  uint32 amended_date_time_value = 15;
+  uint32 bill_to = 16;
+  uint32 buyer = 17;
+  uint32 order_response_identification = 18;
+  uint32 original_order = 19;
+  uint32 sales_order = 20;
+  uint32 seller = 21;
+  uint32 ship_to = 22;
+}
+
+message CreateOrderResponseRequest {
+  string order_response_reason_code = 1;
+  string response_status_code = 2;
+  double total_monetary_amount_excluding_taxes = 3;
+  string tmaet_code_list_version = 4;
+  string tmaet_currency_code = 5;
+  double total_monetary_amount_including_taxes = 6;
+  string tmait_code_list_version = 7;
+  string tmait_currency_code = 8;
+  double total_tax_amount = 9;
+  string tta_code_list_version = 10;
+  string tta_currency_code = 11;
+  uint32 amended_date_time_value = 12;
+  uint32 bill_to = 13;
+  uint32 buyer = 14;
+  uint32 order_response_identification = 15;
+  uint32 original_order = 16;
+  uint32 sales_order = 17;
+  uint32 seller = 18;
+  uint32 ship_to = 19;
+  string user_id = 20;
+  string user_email = 21;
+  string request_id = 22;
+}
+
+message CreateOrderResponseResponse {
+  OrderResponse order_response = 1;
+}
+
+message GetOrderResponsesResponse {
+  repeated OrderResponse order_responses = 1;
+  string next_cursor = 2;
+}
+
+message GetOrderResponsesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetOrderResponseRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetOrderResponseResponse {
+  OrderResponse order_response = 1;
+}
+
+message GetOrderResponseByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetOrderResponseByPkResponse {
+  OrderResponse order_response = 1;
+}
+
+message UpdateOrderResponseRequest {
+  string order_response_reason_code = 1;
+  string response_status_code = 2;
+  double total_monetary_amount_excluding_taxes = 3;
+  string tmaet_code_list_version = 4;
+  string tmaet_currency_code = 5;
+  double total_monetary_amount_including_taxes = 6;
+  string tmait_code_list_version = 7;
+  string tmait_currency_code = 8;
+  double total_tax_amount = 9;
+  string tta_code_list_version = 10;
+  string tta_currency_code = 11;
+  string id = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+}
+
+message UpdateOrderResponseResponse {}
+
+message OrderResponseLineItem {
+  OrderResponseLineItemD order_response_line_item_d = 1;
+  OrderResponseLineItemT order_response_line_item_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message OrderResponseLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  double confirmed_quantity = 4;
+  string cq_measurement_unit_code = 5;
+  string cq_code_list_version = 6;
+  string line_item_action_code = 7;
+  string line_item_change_indicator = 8;
+  uint32 line_item_number = 9;
+  double monetary_amount_excluding_taxes = 10;
+  string maet_code_list_version = 11;
+  string maet_currency_code = 12;
+  double monetary_amount_including_taxes = 13;
+  string mait_code_list_version = 14;
+  string mait_currency_code = 15;
+  double net_amount = 16;
+  string na_code_list_version = 17;
+  string na_currency_code = 18;
+  double net_price = 19;
+  string np_code_list_version = 20;
+  string np_currency_code = 21;
+  string order_response_reason_code = 22;
+  uint32 original_order_line_item_number = 23;
+  uint32 parent_line_item_number = 24;
+  uint32 order_response_id = 25;
+}
+
+message OrderResponseLineItemT {
+  google.protobuf.Timestamp delivery_date_time = 1;
+}
+
+message CreateOrderResponseLineItemRequest {
+  double confirmed_quantity = 1;
+  string cq_measurement_unit_code = 2;
+  string cq_code_list_version = 3;
+  string delivery_date_time = 4;
+  string line_item_action_code = 5;
+  string line_item_change_indicator = 6;
+  uint32 line_item_number = 7;
+  double monetary_amount_excluding_taxes = 8;
+  string maet_code_list_version = 9;
+  string maet_currency_code = 10;
+  double monetary_amount_including_taxes = 11;
+  string mait_code_list_version = 12;
+  string mait_currency_code = 13;
+  double net_amount = 14;
+  string na_code_list_version = 15;
+  string na_currency_code = 16;
+  double net_price = 17;
+  string np_code_list_version = 18;
+  string np_currency_code = 19;
+  string order_response_reason_code = 20;
+  uint32 original_order_line_item_number = 21;
+  uint32 parent_line_item_number = 22;
+  uint32 order_response_id = 23;
+  string user_id = 24;
+  string user_email = 25;
+  string request_id = 26;
+}
+
+message GetOrderResponseLineItemsRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message CreateOrderResponseLineItemResponse {
+  OrderResponseLineItem order_response_line_item = 1;
+}
+
+message GetOrderResponseLineItemsResponse {
+  repeated OrderResponseLineItem order_response_line_items = 1;
+}
+
+message OrderResponseLineItems {
+  repeated OrderResponseLineItem order_response_line_items = 1;
+}
+
+message OrderResponseLineItemDetail {
+  double confirmed_quantity = 1;
+  string cq_measurement_unit_code = 2;
+  string cq_code_list_version = 3;
+  string return_reason_code = 4;
+  uint32 order_response_line_item_id = 5;
+}
+
+message CreateOrderResponseLineItemDetailRequest {
+  double confirmed_quantity = 1;
+  string cq_measurement_unit_code = 2;
+  string cq_code_list_version = 3;
+  string return_reason_code = 4;
+  uint32 order_response_line_item_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateOrderResponseLineItemDetailResponse {
+  OrderResponseLineItemDetail order_response_line_item_detail = 1;
+}

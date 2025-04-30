@@ -1,0 +1,874 @@
+syntax = "proto3";
+
+package inventory.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/inventory/v1";
+
+// The InventoryService service definition.
+service InventoryService {
+  rpc CreateConsumptionReportItemLocationInformation(CreateConsumptionReportItemLocationInformationRequest) returns (CreateConsumptionReportItemLocationInformationResponse);
+  rpc CreateConsumptionReportLineItem(CreateConsumptionReportLineItemRequest) returns (CreateConsumptionReportLineItemResponse);
+  rpc CreateConsumptionReport(CreateConsumptionReportRequest) returns (CreateConsumptionReportResponse);
+  rpc CreateInventoryActivityLineItem(CreateInventoryActivityLineItemRequest) returns (CreateInventoryActivityLineItemResponse);
+  rpc CreateInventoryActivityQuantitySpecification(CreateInventoryActivityQuantitySpecificationRequest) returns (CreateInventoryActivityQuantitySpecificationResponse);
+  rpc CreateInventoryItemLocationInformation(CreateInventoryItemLocationInformationRequest) returns (CreateInventoryItemLocationInformationResponse);
+  rpc CreateInventoryReport(CreateInventoryReportRequest) returns (CreateInventoryReportResponse);
+  rpc CreateInventoryStatusLineItem(CreateInventoryStatusLineItemRequest) returns (CreateInventoryStatusLineItemResponse);
+  rpc CreateInventorySubLocation(CreateInventorySubLocationRequest) returns (CreateInventorySubLocationResponse);
+  rpc CreateLogisticUnitInventoryEvent(CreateLogisticUnitInventoryEventRequest) returns (CreateLogisticUnitInventoryEventResponse);
+  rpc CreateLogisticsInventoryReport(CreateLogisticsInventoryReportRequest) returns (CreateLogisticsInventoryReportResponse);
+  rpc CreateLogisticsInventoryReportInventoryLocation(CreateLogisticsInventoryReportInventoryLocationRequest) returns (CreateLogisticsInventoryReportInventoryLocationResponse);
+  rpc CreateLogisticUnitInventoryStatus(CreateLogisticUnitInventoryStatusRequest) returns (CreateLogisticUnitInventoryStatusResponse);
+  rpc CreateLogisticUnitReference(CreateLogisticUnitReferenceRequest) returns (CreateLogisticUnitReferenceResponse);
+  rpc CreateReturnablePackagingInventoryEvent(CreateReturnablePackagingInventoryEventRequest) returns (CreateReturnablePackagingInventoryEventResponse);
+  rpc CreateTradeItemInventoryStatus(CreateTradeItemInventoryStatusRequest) returns (CreateTradeItemInventoryStatusResponse);
+  rpc CreateTradeItemInventoryEvent(CreateTradeItemInventoryEventRequest) returns (CreateTradeItemInventoryEventResponse);
+  rpc CreateTransactionalItemCertification(CreateTransactionalItemCertificationRequest) returns (CreateTransactionalItemCertificationResponse);
+  rpc CreateTransactionalItemData(CreateTransactionalItemDataRequest) returns (CreateTransactionalItemDataResponse);
+  rpc CreateTransactionalItemDataCarrierAndIdentification(CreateTransactionalItemDataCarrierAndIdentificationRequest) returns (CreateTransactionalItemDataCarrierAndIdentificationResponse);
+  rpc CreateTransactionalItemLogisticUnitInformation(CreateTransactionalItemLogisticUnitInformationRequest) returns (CreateTransactionalItemLogisticUnitInformationResponse);
+  rpc CreateTransactionalItemOrganicInformation(CreateTransactionalItemOrganicInformationRequest) returns (CreateTransactionalItemOrganicInformationResponse);
+  rpc CreateTransactionalReference(CreateTransactionalReferenceRequest) returns (CreateTransactionalReferenceResponse);
+  rpc CreateTransportEquipmentInventoryEvent(CreateTransportEquipmentInventoryEventRequest) returns (CreateTransportEquipmentInventoryEventResponse);
+  rpc CreateTransportEquipmentInventoryStatus(CreateTransportEquipmentInventoryStatusRequest) returns (CreateTransportEquipmentInventoryStatusResponse);
+}
+
+message ConsumptionReportItemLocationInformation {
+  uint32 id = 1;
+  double total_consumption_amount = 2;
+  string t_c_a_code_list_version = 3;
+  string t_c_a_c_currency_code = 4;
+  uint32 inventory_location = 5;
+  uint32 ship_to = 6;
+  uint32 consumption_report_id = 7;
+}
+
+message CreateConsumptionReportItemLocationInformationRequest {
+  double total_consumption_amount = 1;
+  string t_c_a_code_list_version = 2;
+  string t_c_a_c_currency_code = 3;
+  uint32 inventory_location = 4;
+  uint32 ship_to = 5;
+  uint32 consumption_report_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateConsumptionReportItemLocationInformationResponse {
+  ConsumptionReportItemLocationInformation consumption_report_item_location_information = 1;
+}
+
+message ConsumptionReportLineItem {
+  ConsumptionReportLineItemD consumption_report_line_item_d = 1;
+  ConsumptionReportLineItemT consumption_report_line_item_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message ConsumptionReportLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  double consumed_quantity = 4;
+  string c_q_measurement_unit_code = 5;
+  string c_q_code_list_version = 6;
+  uint32 line_item_number = 7;
+  double net_consumption_amount = 8;
+  string n_c_a_c_code_list_version = 9;
+  string n_c_a_c_currency_code = 10;
+  double net_price = 11;
+  string n_p_code_list_version = 12;
+  string n_p_currency_code = 13;
+  uint32 parent_line_item_number = 14;
+  string plan_bucket_size_code = 15;
+  uint32 purchase_conditions = 16;
+  uint32 consumption_report_id = 17;
+}
+
+message ConsumptionReportLineItemT {
+  google.protobuf.Timestamp consumption_period_begin = 1;
+  google.protobuf.Timestamp consumption_period_end = 2;
+}
+
+message CreateConsumptionReportLineItemRequest {
+  double consumed_quantity = 1;
+  string c_q_measurement_unit_code = 2;
+  string c_q_code_list_version = 3;
+  uint32 line_item_number = 4;
+  double net_consumption_amount = 5;
+  string n_c_a_c_code_list_version = 6;
+  string n_c_a_c_currency_code = 7;
+  double net_price = 8;
+  string n_p_code_list_version = 9;
+  string n_p_currency_code = 10;
+  uint32 parent_line_item_number = 11;
+  string plan_bucket_size_code = 12;
+  string consumption_period_begin = 13;
+  string consumption_period_end = 14;
+  uint32 purchase_conditions = 15;
+  uint32 consumption_report_id = 16;
+  string user_id = 17;
+  string user_email = 18;
+  string request_id = 19;
+}
+
+message CreateConsumptionReportLineItemResponse {
+  ConsumptionReportLineItem consumption_report_line_item = 1;
+}
+
+message ConsumptionReport {
+  ConsumptionReportD consumption_report_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message ConsumptionReportD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 buyer = 4;
+  uint32 consumption_report_identification = 5;
+  uint32 seller = 6;
+}
+
+message CreateConsumptionReportRequest {
+  uint32 buyer = 1;
+  uint32 consumption_report_identification = 2;
+  uint32 seller = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateConsumptionReportResponse {
+  ConsumptionReport consumption_report = 1;
+}
+
+message InventoryActivityLineItem {
+  InventoryActivityLineItemD inventory_activity_line_item_d = 1;
+  InventoryActivityLineItemT inventory_activity_line_item_t = 2;
+}
+
+message InventoryActivityLineItemD {
+  uint32 id = 1;
+  uint32 line_item_number = 2;
+  uint32 parent_line_item_number = 3;
+  uint32 inventory_item_location_information_id = 4;
+  uint32 inventory_report_id = 5;
+}
+
+message InventoryActivityLineItemT {
+  google.protobuf.Timestamp reporting_period_begin = 1;
+  google.protobuf.Timestamp reporting_period_end = 2;
+}
+
+message CreateInventoryActivityLineItemRequest {
+  uint32 line_item_number = 1;
+  uint32 parent_line_item_number = 2;
+  string reporting_period_begin = 3;
+  string reporting_period_end = 4;
+  uint32 inventory_item_location_information_id = 5;
+  uint32 inventory_report_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateInventoryActivityLineItemResponse {
+  InventoryActivityLineItem inventory_activity_line_item = 1;
+}
+
+message InventoryActivityQuantitySpecification {
+  uint32 id = 1;
+  string inventory_activity_type_code = 2;
+  string inventory_movement_type_code = 3;
+  double quantity_of_units = 4;
+  string q_o_u_measurement_unit_code = 5;
+  string q_o_u_code_list_version = 6;
+  uint32 inventory_status_line_item_id = 7;
+  uint32 inventory_activity_line_item_id = 8;
+  uint32 inventory_report_id = 9;
+}
+
+message CreateInventoryActivityQuantitySpecificationRequest {
+  string inventory_activity_type_code = 1;
+  string inventory_movement_type_code = 2;
+  double quantity_of_units = 3;
+  string q_o_u_measurement_unit_code = 4;
+  string q_o_u_code_list_version = 5;
+  uint32 inventory_status_line_item_id = 6;
+  uint32 inventory_activity_line_item_id = 7;
+  uint32 inventory_report_id = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+}
+
+message CreateInventoryActivityQuantitySpecificationResponse {
+  InventoryActivityQuantitySpecification inventory_activity_quantity_specification = 1;
+}
+
+message InventoryItemLocationInformation {
+  uint32 id = 1;
+  uint32 inventory_location_id = 2;
+  uint32 inventory_report_id = 3;
+}
+
+message CreateInventoryItemLocationInformationRequest {
+  uint32 inventory_location_id = 1;
+  uint32 inventory_report_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateInventoryItemLocationInformationResponse {
+  InventoryItemLocationInformation inventory_item_location_information = 1;
+}
+
+message InventoryReport {
+  InventoryReportD inventory_report_d = 1;
+  InventoryReportT inventory_report_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message InventoryReportD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string inventory_report_type_code = 4;
+  string structure_type_code = 5;
+  uint32 inventory_report_identification = 6;
+  uint32 inventory_reporting_party = 7;
+  uint32 inventory_report_to_party = 8;
+}
+
+message InventoryReportT {
+  google.protobuf.Timestamp reporting_period_begin = 1;
+  google.protobuf.Timestamp reporting_period_end = 2;
+}
+
+message CreateInventoryReportRequest {
+  string inventory_report_type_code = 1;
+  string structure_type_code = 2;
+  uint32 inventory_report_identification = 3;
+  uint32 inventory_reporting_party = 4;
+  uint32 inventory_report_to_party = 5;
+  string reporting_period_begin = 6;
+  string reporting_period_end = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message CreateInventoryReportResponse {
+  InventoryReport inventory_report = 1;
+}
+
+message InventoryStatusLineItem {
+  InventoryStatusLineItemD inventory_status_line_item_d = 1;
+  InventoryStatusLineItemT inventory_status_line_item_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message InventoryStatusLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string handling_unit_type = 4;
+  double inventory_unit_cost = 5;
+  string i_u_c_code_list_version = 6;
+  string i_u_c_currency_code = 7;
+  uint32 line_item_number = 8;
+  uint32 parent_line_item_number = 9;
+  uint32 inventory_status_owner = 10;
+  uint32 inventory_sub_location_id = 11;
+  uint32 logistic_unit_identification = 12;
+  uint32 returnable_asset_identification = 13;
+  string inventory_report_type_code = 14;
+  string structure_type_code = 15;
+  uint32 inventory_report_identification = 16;
+  uint32 inventory_reporting_party = 17;
+  uint32 inventory_report_to_party = 18;
+  uint32 inventory_item_location_information_id = 19;
+  uint32 inventory_report_id = 20;
+}
+
+message InventoryStatusLineItemT {
+  google.protobuf.Timestamp first_in_first_out_date_time_begin = 1;
+  google.protobuf.Timestamp first_in_first_out_date_time_end = 2;
+  google.protobuf.Timestamp inventory_date_time_begin = 3;
+  google.protobuf.Timestamp inventory_date_time_end = 4;
+  google.protobuf.Timestamp reporting_period_begin = 5;
+  google.protobuf.Timestamp reporting_period_end = 6;
+}
+
+message CreateInventoryStatusLineItemRequest {
+  string first_in_first_out_date_time_begin = 1;
+  string first_in_first_out_date_time_end = 2;
+  string handling_unit_type = 3;
+  string inventory_date_time_begin = 4;
+  string inventory_date_time_end = 5;
+  double inventory_unit_cost = 6;
+  string i_u_c_code_list_version = 7;
+  string i_u_c_currency_code = 8;
+  uint32 line_item_number = 9;
+  uint32 parent_line_item_number = 10;
+  uint32 inventory_status_owner = 11;
+  uint32 inventory_sub_location_id = 12;
+  uint32 logistic_unit_identification = 13;
+  uint32 returnable_asset_identification = 14;
+  string inventory_report_type_code = 15;
+  string structure_type_code = 16;
+  uint32 inventory_report_identification = 17;
+  uint32 inventory_reporting_party = 18;
+  uint32 inventory_report_to_party = 19;
+  string reporting_period_begin = 20;
+  string reporting_period_end = 21;
+  uint32 inventory_item_location_information_id = 22;
+  uint32 inventory_report_id = 23;
+  string user_id = 24;
+  string user_email = 25;
+  string request_id = 26;
+}
+
+message CreateInventoryStatusLineItemResponse {
+  InventoryStatusLineItem inventory_status_line_item = 1;
+}
+
+message InventorySubLocation {
+  uint32 id = 1;
+  uint32 buyer = 2;
+  string additional_party_identification = 3;
+  string additional_party_identification_type_code = 4;
+  string code_list_version = 5;
+  string gln = 6;
+  string gln_extension = 7;
+  string inventory_sub_location_function_code = 8;
+  string inventory_sub_location_type_code = 9;
+}
+
+message CreateInventorySubLocationRequest {
+  string additional_party_identification = 1;
+  string additional_party_identification_type_code = 2;
+  string code_list_version = 3;
+  string gln = 4;
+  string gln_extension = 5;
+  string inventory_sub_location_function_code = 6;
+  string inventory_sub_location_type_code = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message CreateInventorySubLocationResponse {
+  InventorySubLocation inventory_sub_location = 1;
+}
+
+message LogisticUnitInventoryEvent {
+  LogisticUnitInventoryEventD logistic_unit_inventory_event_d = 1;
+  LogisticUnitInventoryEventT logistic_unit_inventory_event_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message LogisticUnitInventoryEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string event_identifier = 4;
+  string inventory_business_step_code = 5;
+  string inventory_event_reason_code = 6;
+  string inventory_movement_type_code = 7;
+  uint32 inventory_sub_location_id = 8;
+}
+
+message LogisticUnitInventoryEventT {
+  google.protobuf.Timestamp event_date_time = 1;
+}
+
+message CreateLogisticUnitInventoryEventRequest {
+  string event_date_time = 1;
+  string event_identifier = 2;
+  string inventory_business_step_code = 3;
+  string inventory_event_reason_code = 4;
+  string inventory_movement_type_code = 5;
+  uint32 inventory_sub_location_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateLogisticUnitInventoryEventResponse {
+  LogisticUnitInventoryEvent logistic_unit_inventory_event = 1;
+}
+
+message LogisticsInventoryReport {
+  LogisticsInventoryReportD logistics_inventory_report_d = 1;
+  LogisticsInventoryReportT logistics_inventory_report_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message LogisticsInventoryReportD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string structure_type_code = 4;
+  string type_of_service_transaction = 5;
+  uint32 inventory_reporting_party = 6;
+  uint32 inventory_report_to_party = 7;
+  uint32 logistics_inventory_report_identification = 8;
+  uint32 logistics_inventory_report_request = 9;
+}
+
+message LogisticsInventoryReportT {
+  google.protobuf.Timestamp reporting_period_begin = 1;
+  google.protobuf.Timestamp reporting_period_end = 2;
+}
+
+message CreateLogisticsInventoryReportRequest {
+  string structure_type_code = 1;
+  string type_of_service_transaction = 2;
+  uint32 inventory_reporting_party = 3;
+  uint32 inventory_report_to_party = 4;
+  uint32 logistics_inventory_report_identification = 5;
+  uint32 logistics_inventory_report_request = 6;
+  string reporting_period_begin = 7;
+  string reporting_period_end = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+}
+
+message CreateLogisticsInventoryReportResponse {
+  LogisticsInventoryReport logistics_inventory_report = 1;
+}
+
+message LogisticsInventoryReportInventoryLocation {
+  uint32 id = 1;
+  uint32 inventory_location_id = 2;
+  uint32 logistics_inventory_report_id = 3;
+}
+
+message CreateLogisticsInventoryReportInventoryLocationRequest {
+  uint32 inventory_location_id = 1;
+  uint32 logistics_inventory_report_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateLogisticsInventoryReportInventoryLocationResponse {
+  LogisticsInventoryReportInventoryLocation logistics_inventory_report_inventory_location = 1;
+}
+
+message LogisticUnitInventoryStatus {
+  LogisticUnitInventoryStatusD logistic_unit_inventory_status_d = 1;
+  LogisticUnitInventoryStatusT logistic_unit_inventory_status_t = 2;
+}
+
+message LogisticUnitInventoryStatusD {
+  uint32 id = 1;
+  string inventory_disposition_code = 2;
+  uint32 inventory_sub_location_id = 3;
+}
+
+message LogisticUnitInventoryStatusT {
+  google.protobuf.Timestamp inventory_date_time = 1;
+}
+
+message CreateLogisticUnitInventoryStatusRequest {
+  string inventory_date_time = 1;
+  string inventory_disposition_code = 2;
+  uint32 inventory_sub_location_id = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateLogisticUnitInventoryStatusResponse {
+  LogisticUnitInventoryStatus logistic_unit_inventory_status = 1;
+}
+
+message LogisticUnitReference {
+  uint32 id = 1;
+  double trade_item_quantity = 2;
+  string q_measurement_unit_code = 3;
+  string q_code_list_version = 4;
+}
+
+message CreateLogisticUnitReferenceRequest {
+  double trade_item_quantity = 1;
+  string q_measurement_unit_code = 2;
+  string q_code_list_version = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateLogisticUnitReferenceResponse {
+  LogisticUnitReference logistic_unit_reference = 1;
+}
+
+message ReturnablePackagingInventoryEvent {
+  ReturnablePackagingInventoryEventD returnable_packaging_inventory_event_d = 1;
+  ReturnablePackagingInventoryEventT returnable_packaging_inventory_event_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message ReturnablePackagingInventoryEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string event_identifier = 4;
+  string inventory_business_step_code = 5;
+  string inventory_event_reason_code = 6;
+  string inventory_movement_type_code = 7;
+  uint32 inventory_sub_location_id = 8;
+}
+
+message ReturnablePackagingInventoryEventT {
+  google.protobuf.Timestamp event_date_time = 1;
+}
+
+message CreateReturnablePackagingInventoryEventRequest {
+  string event_date_time = 1;
+  string event_identifier = 2;
+  string inventory_business_step_code = 3;
+  string inventory_event_reason_code = 4;
+  string inventory_movement_type_code = 5;
+  uint32 inventory_sub_location_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateReturnablePackagingInventoryEventResponse {
+  ReturnablePackagingInventoryEvent returnable_packaging_inventory_event = 1;
+}
+
+message TradeItemInventoryEvent {
+  TradeItemInventoryEventD trade_item_inventory_event_d = 1;
+  TradeItemInventoryEventT trade_item_inventory_event_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message TradeItemInventoryEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string event_identifier = 4;
+  string inventory_business_step_code = 5;
+  string inventory_disposition_code = 6;
+  string inventory_event_reason_code = 7;
+  string inventory_movement_type_code = 8;
+  uint32 inventory_sub_location_id = 9;
+  uint32 liable_party = 10;
+  uint32 logistics_inventory_report_id = 11;
+}
+
+message TradeItemInventoryEventT {
+  google.protobuf.Timestamp event_date_time = 1;
+}
+
+message CreateTradeItemInventoryEventRequest {
+  string event_date_time = 1;
+  string event_identifier = 2;
+  string inventory_business_step_code = 3;
+  string inventory_disposition_code = 4;
+  string inventory_event_reason_code = 5;
+  string inventory_movement_type_code = 6;
+  uint32 inventory_sub_location_id = 7;
+  uint32 liable_party = 8;
+  uint32 logistics_inventory_report_id = 9;
+  string user_id = 10;
+  string user_email = 11;
+  string request_id = 12;
+}
+
+message CreateTradeItemInventoryEventResponse {
+  TradeItemInventoryEvent trade_item_inventory_event = 1;
+}
+
+message TradeItemInventoryStatus {
+  TradeItemInventoryStatusD trade_item_inventory_status_d = 1;
+  TradeItemInventoryStatusT trade_item_inventory_status_t = 2;
+}
+
+message TradeItemInventoryStatusD {
+  uint32 id = 1;
+  string inventory_disposition_code = 2;
+  uint32 inventory_sub_location_id = 3;
+  uint32 logistics_inventory_report_id = 4;
+}
+
+message TradeItemInventoryStatusT {
+  google.protobuf.Timestamp inventory_date_time = 1;
+}
+
+message CreateTradeItemInventoryStatusRequest {
+  string inventory_date_time = 1;
+  string inventory_disposition_code = 2;
+  uint32 inventory_sub_location_id = 3;
+  uint32 logistics_inventory_report_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateTradeItemInventoryStatusResponse {
+  TradeItemInventoryStatus trade_item_inventory_status = 1;
+}
+
+message TransactionalItemCertification {
+  uint32 id = 1;
+  string item_certification_agency = 2;
+  string item_certification_standard = 3;
+  string item_certification_value = 4;
+  uint32 organic_certification_id = 5;
+}
+
+message CreateTransactionalItemCertificationRequest {
+  string item_certification_agency = 1;
+  string item_certification_standard = 2;
+  string item_certification_value = 3;
+  uint32 organic_certification_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateTransactionalItemCertificationResponse {
+  TransactionalItemCertification transactional_item_certification = 1;
+}
+
+message TransactionalItemData {
+  TransactionalItemDataD transactional_item_data_d = 1;
+  TransactionalItemDataT transactional_item_data_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message TransactionalItemDataD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string batch_number = 4;
+  string country_of_origin = 5;
+  bool item_in_contact_with_food_product = 6;
+  string lot_number = 7;
+  uint32 product_quality_indication = 8;
+  string serial_number = 9;
+  string shelf_life = 10;
+  uint32 trade_item_quantity = 11;
+  uint32 trade_item_inventory_status_id = 12;
+}
+
+message TransactionalItemDataT {
+  google.protobuf.Timestamp available_for_sale_date = 1;
+  google.protobuf.Timestamp best_before_date = 2;
+  google.protobuf.Timestamp item_expiration_date = 3;
+  google.protobuf.Timestamp packaging_date = 4;
+  google.protobuf.Timestamp production_date = 5;
+  google.protobuf.Timestamp sell_by_date = 6;
+}
+
+message CreateTransactionalItemDataRequest {
+  string available_for_sale_date = 1;
+  string batch_number = 2;
+  string best_before_date = 3;
+  string country_of_origin = 4;
+  string item_expiration_date = 5;
+  bool item_in_contact_with_food_product = 6;
+  string lot_number = 7;
+  string packaging_date = 8;
+  string production_date = 9;
+  uint32 product_quality_indication = 10;
+  string sell_by_date = 11;
+  string serial_number = 12;
+  string shelf_life = 13;
+  uint32 trade_item_quantity = 14;
+  uint32 trade_item_inventory_status_id = 15;
+  string user_id = 16;
+  string user_email = 17;
+  string request_id = 18;
+}
+
+message CreateTransactionalItemDataResponse {
+  TransactionalItemData transactional_item_data = 1;
+}
+
+message TransactionalItemDataCarrierAndIdentification {
+  uint32 id = 1;
+  string data_carrier = 2;
+  string gs1_transactional_item_identification_key = 3;
+  uint32 transactional_item_data_id = 4;
+}
+
+message CreateTransactionalItemDataCarrierAndIdentificationRequest {
+  string data_carrier = 1;
+  string gs1_transactional_item_identification_key = 2;
+  uint32 transactional_item_data_id = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateTransactionalItemDataCarrierAndIdentificationResponse {
+  TransactionalItemDataCarrierAndIdentification transactional_item_data_carrier_and_identification = 1;
+}
+
+message TransactionalItemLogisticUnitInformation {
+  TransactionalItemLogisticUnitInformationD transactional_item_logistic_unit_information_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message TransactionalItemLogisticUnitInformationD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 maximum_stacking_factor = 4;
+  uint32 number_of_layers = 5;
+  uint32 number_of_units_per_layer = 6;
+  uint32 number_of_units_per_pallet = 7;
+  string package_type_code = 8;
+  string packaging_terms = 9;
+  string returnable_package_transport_cost_payment = 10;
+  uint32 transactional_item_data_id = 11;
+}
+
+message CreateTransactionalItemLogisticUnitInformationRequest {
+  uint32 maximum_stacking_factor = 1;
+  uint32 number_of_layers = 2;
+  uint32 number_of_units_per_layer = 3;
+  uint32 number_of_units_per_pallet = 4;
+  string package_type_code = 5;
+  string packaging_terms = 6;
+  string returnable_package_transport_cost_payment = 7;
+  uint32 transactional_item_data_id = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+}
+
+message CreateTransactionalItemLogisticUnitInformationResponse {
+  TransactionalItemLogisticUnitInformation transactional_item_logistic_unit_information = 1;
+}
+
+message TransactionalItemOrganicInformation {
+  uint32 id = 1;
+  bool is_trade_item_organic = 2;
+  uint32 transactional_item_data_id = 3;
+}
+
+message CreateTransactionalItemOrganicInformationRequest {
+  bool is_trade_item_organic = 1;
+  uint32 transactional_item_data_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateTransactionalItemOrganicInformationResponse {
+  TransactionalItemOrganicInformation transactional_item_organic_information = 1;
+}
+
+message TransactionalReference {
+  uint32 id = 1;
+  string transactional_reference_type_code = 2;
+  uint32 ecom_document_reference = 3;
+}
+
+message CreateTransactionalReferenceRequest {
+  string transactional_reference_type_code = 1;
+  uint32 ecom_document_reference = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateTransactionalReferenceResponse {
+  TransactionalReference transactional_reference = 1;
+}
+
+message TransportEquipmentInventoryEvent {
+  TransportEquipmentInventoryEventD transport_equipment_inventory_event_d = 1;
+  TransportEquipmentInventoryEventT transport_equipment_inventory_event_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message TransportEquipmentInventoryEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string event_identifier = 4;
+  string inventory_business_step_code = 5;
+  string inventory_disposition_code = 6;
+  string inventory_event_reason_code = 7;
+  string inventory_movement_type_code = 8;
+  uint32 number_of_pieces_of_equipment = 9;
+  uint32 inventory_sub_location_id = 10;
+}
+
+message TransportEquipmentInventoryEventT {
+  google.protobuf.Timestamp event_date_time = 1;
+}
+
+message CreateTransportEquipmentInventoryEventRequest {
+  string event_date_time = 1;
+  string event_identifier = 2;
+  string inventory_business_step_code = 3;
+  string inventory_disposition_code = 4;
+  string inventory_event_reason_code = 5;
+  string inventory_movement_type_code = 6;
+  uint32 number_of_pieces_of_equipment = 7;
+  uint32 inventory_sub_location_id = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+}
+
+message CreateTransportEquipmentInventoryEventResponse {
+  TransportEquipmentInventoryEvent transport_equipment_inventory_event = 1;
+}
+
+message TransportEquipmentInventoryStatus {
+  TransportEquipmentInventoryStatusD transport_equipment_inventory_status_d = 1;
+  TransportEquipmentInventoryStatusT transport_equipment_inventory_status_t = 2;
+}
+
+message TransportEquipmentInventoryStatusD {
+  uint32 id = 1;
+  string inventory_disposition_code = 2;
+  uint32 number_of_pieces_of_equipment = 3;
+  uint32 inventory_sub_location_id = 4;
+}
+
+message TransportEquipmentInventoryStatusT {
+  google.protobuf.Timestamp inventory_date_time = 1;
+}
+
+message CreateTransportEquipmentInventoryStatusRequest {
+  string inventory_date_time = 1;
+  string inventory_disposition_code = 2;
+  uint32 number_of_pieces_of_equipment = 3;
+  uint32 inventory_sub_location_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateTransportEquipmentInventoryStatusResponse {
+  TransportEquipmentInventoryStatus transport_equipment_inventory_status = 1;
+}

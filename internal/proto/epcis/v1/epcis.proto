@@ -1,0 +1,734 @@
+syntax = "proto3";
+
+package epcis.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/epcis/v1";
+
+// The EpcisService service definition.
+service EpcisService {
+  rpc CreateObjectEvent(CreateObjectEventRequest) returns (CreateObjectEventResponse);
+  rpc GetObjectEvents(GetObjectEventsRequest) returns (GetObjectEventsResponse);
+  rpc GetObjectEvent(GetObjectEventRequest) returns (GetObjectEventResponse);
+  rpc CreateAggregationEvent(CreateAggregationEventRequest) returns (CreateAggregationEventResponse);
+  rpc GetAggregationEvents(GetAggregationEventsRequest) returns (GetAggregationEventsResponse);
+  rpc GetAggregationEvent(GetAggregationEventRequest) returns (GetAggregationEventResponse);
+  rpc CreateAssociationEvent(CreateAssociationEventRequest) returns (CreateAssociationEventResponse);
+  rpc GetAssociationEvents(GetAssociationEventsRequest) returns (GetAssociationEventsResponse);
+  rpc GetAssociationEvent(GetAssociationEventRequest) returns (GetAssociationEventResponse);
+  rpc CreateTransactionEvent(CreateTransactionEventRequest) returns (CreateTransactionEventResponse);
+  rpc GetTransactionEvents(GetTransactionEventsRequest) returns (GetTransactionEventsResponse);
+  rpc GetTransactionEvent(GetTransactionEventRequest) returns (GetTransactionEventResponse);
+  rpc CreateTransformationEvent(CreateTransformationEventRequest) returns (CreateTransformationEventResponse);
+  rpc GetTransformationEvents(GetTransformationEventsRequest) returns (GetTransformationEventsResponse);
+  rpc GetTransformationEvent(GetTransformationEventRequest) returns (GetTransformationEventResponse);
+  rpc CreatePersistentDisposition(CreatePersistentDispositionRequest) returns (CreatePersistentDispositionResponse);
+  rpc GetPersistentDispositions(GetPersistentDispositionsRequest) returns (GetPersistentDispositionsResponse);
+  rpc CreateEpc(CreateEpcRequest) returns (CreateEpcResponse);
+  rpc GetEpcs(GetEpcsRequest) returns (GetEpcsResponse);
+  rpc CreateBizTransaction(CreateBizTransactionRequest) returns (CreateBizTransactionResponse);
+  rpc GetBizTransactions(GetBizTransactionsRequest) returns (GetBizTransactionsResponse);
+  rpc CreateQuantityElement(CreateQuantityElementRequest) returns (CreateQuantityElementResponse);
+  rpc GetQuantityElements(GetQuantityElementsRequest) returns (GetQuantityElementsResponse);
+  rpc CreateSource(CreateSourceRequest) returns (CreateSourceResponse);
+  rpc GetSources(GetSourcesRequest) returns (GetSourcesResponse);
+  rpc CreateDestination(CreateDestinationRequest) returns (CreateDestinationResponse);
+  rpc GetDestinations(GetDestinationsRequest) returns (GetDestinationsResponse);
+  rpc CreateSensorElement(CreateSensorElementRequest) returns (CreateSensorElementResponse);
+  rpc GetSensorElements(GetSensorElementsRequest) returns (GetSensorElementsResponse);
+}
+
+message ObjectEvent {
+  common.v1.EpcisEventD epcis_event_d = 1;
+  common.v1.EpcisEventT epcis_event_t = 2;
+  common.v1.ErrorDeclarationD error_declaration_d = 3;
+  common.v1.ErrorDeclarationT error_declaration_t = 4;
+  ObjectEventD object_event_d = 5;
+  common.v1.CrUpdUser cr_upd_user = 6;
+  repeated PersistentDisposition persistent_dispositions = 7;
+  repeated Epc epc_list = 8;
+  repeated BizTransaction biz_transaction_list = 9;
+  repeated QuantityElement quantity_list = 10;
+  repeated Source source_list = 11;
+  repeated Destination destination_list = 12;
+  repeated SensorElement sensor_element_list = 13;
+}
+
+message ObjectEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string action = 4;
+  string biz_step = 5;
+  string disposition = 6;
+  string read_point = 7;
+  string biz_location = 8;
+  string ilmd = 9;
+}
+
+message CreateObjectEventRequest {
+  string event_id = 1;
+  string event_time_zone_offset = 2;
+  string certification = 3;
+  string event_time = 4;
+  string reason = 5;
+  string declaration_time = 6;
+  string action = 7;
+  string biz_step = 8;
+  string disposition = 9;
+  string read_point = 10;
+  string biz_location = 11;
+  string ilmd = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+  repeated CreatePersistentDispositionRequest persistent_dispositions = 16;
+  repeated CreateEpcRequest epc_list = 17;
+  repeated CreateBizTransactionRequest biz_transaction_list = 18;
+  repeated CreateQuantityElementRequest quantity_list = 19;
+  repeated CreateSourceRequest source_list = 20;
+  repeated CreateDestinationRequest destination_list = 21;
+  repeated CreateSensorElementRequest sensor_element_list = 22;
+}
+
+message CreateObjectEventResponse {
+  ObjectEvent object_event = 1;
+}
+
+message GetObjectEventRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetObjectEventResponse {
+  ObjectEvent object_event = 1;
+}
+
+message GetObjectEventsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetObjectEventsResponse {
+  repeated ObjectEvent object_events = 1;
+  string next_cursor = 2;
+}
+
+message AggregationEvent {
+  common.v1.EpcisEventD epcis_event_d = 1;
+  common.v1.EpcisEventT epcis_event_t = 2;
+  common.v1.ErrorDeclarationD error_declaration_d = 3;
+  common.v1.ErrorDeclarationT error_declaration_t = 4;
+  AggregationEventD aggregation_event_d = 5;
+  common.v1.CrUpdUser cr_upd_user = 6;
+  repeated PersistentDisposition persistent_dispositions = 7;
+  repeated Epc child_epcs = 8;
+  repeated BizTransaction biz_transaction_list = 9;
+  repeated QuantityElement child_quantity_list = 10;
+  repeated Source source_list = 11;
+  repeated Destination destination_list = 12;
+  repeated SensorElement sensor_element_list = 13;
+}
+
+message AggregationEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string parent_id = 4;
+  string action = 5;
+  string biz_step = 6;
+  string disposition = 7;
+  string read_point = 8;
+  string biz_location = 9;
+}
+
+message CreateAggregationEventRequest {
+  string event_id = 1;
+  string event_time_zone_offset = 2;
+  string certification = 3;
+  string event_time = 4;
+  string reason = 5;
+  string declaration_time = 6;
+  string parent_id = 7;
+  string action = 8;
+  string biz_step = 9;
+  string disposition = 10;
+  string read_point = 11;
+  string biz_location = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+  repeated CreatePersistentDispositionRequest persistent_dispositions = 16;
+  repeated CreateEpcRequest child_epcs = 17;
+  repeated CreateBizTransactionRequest biz_transaction_list = 18;
+  repeated CreateQuantityElementRequest child_quantity_list = 19;
+  repeated CreateSourceRequest source_list = 20;
+  repeated CreateDestinationRequest destination_list = 21;
+  repeated CreateSensorElementRequest sensor_element_list = 22;
+}
+
+message CreateAggregationEventResponse {
+  AggregationEvent aggregation_event = 1;
+}
+
+message GetAggregationEventRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetAggregationEventResponse {
+  AggregationEvent aggregation_event = 1;
+}
+
+message GetAggregationEventsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetAggregationEventsResponse {
+  repeated AggregationEvent aggregation_events = 1;
+  string next_cursor = 2;
+}
+
+message AssociationEvent {
+  common.v1.EpcisEventD epcis_event_d = 1;
+  common.v1.EpcisEventT epcis_event_t = 2;
+  common.v1.ErrorDeclarationD error_declaration_d = 3;
+  common.v1.ErrorDeclarationT error_declaration_t = 4;
+  AssociationEventD association_event_d = 5;
+  common.v1.CrUpdUser cr_upd_user = 6;
+  repeated PersistentDisposition persistent_dispositions = 7;
+  repeated Epc child_epcs = 8;
+  repeated BizTransaction biz_transaction_list = 9;
+  repeated QuantityElement child_quantity_list = 10;
+  repeated Source source_list = 11;
+  repeated Destination destination_list = 12;
+  repeated SensorElement sensor_element_list = 13;
+}
+
+message AssociationEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string parent_id = 4;
+  string action = 5;
+  string biz_step = 6;
+  string disposition = 7;
+  string read_point = 8;
+  string biz_location = 9;
+}
+
+message CreateAssociationEventRequest {
+  string event_id = 1;
+  string event_time_zone_offset = 2;
+  string certification = 3;
+  string event_time = 4;
+  string reason = 5;
+  string declaration_time = 6;
+  string parent_id = 7;
+  string action = 8;
+  string biz_step = 9;
+  string disposition = 10;
+  string read_point = 11;
+  string biz_location = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+  repeated CreatePersistentDispositionRequest persistent_dispositions = 16;
+  repeated CreateEpcRequest child_epcs = 17;
+  repeated CreateBizTransactionRequest biz_transaction_list = 18;
+  repeated CreateQuantityElementRequest child_quantity_list = 19;
+  repeated CreateSourceRequest source_list = 20;
+  repeated CreateDestinationRequest destination_list = 21;
+  repeated CreateSensorElementRequest sensor_element_list = 22;
+}
+
+message CreateAssociationEventResponse {
+  AssociationEvent association_event = 1;
+}
+
+message GetAssociationEventRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetAssociationEventResponse {
+  AssociationEvent association_event = 1;
+}
+
+message GetAssociationEventsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetAssociationEventsResponse {
+  repeated AssociationEvent association_events = 1;
+  string next_cursor = 2;
+}
+
+message TransactionEvent {
+  common.v1.EpcisEventD epcis_event_d = 1;
+  common.v1.EpcisEventT epcis_event_t = 2;
+  common.v1.ErrorDeclarationD error_declaration_d = 3;
+  common.v1.ErrorDeclarationT error_declaration_t = 4;
+  TransactionEventD transaction_event_d = 5;
+  common.v1.CrUpdUser cr_upd_user = 6;
+  repeated PersistentDisposition persistent_dispositions = 7;
+  repeated Epc epc_list = 8;
+  repeated BizTransaction biz_transaction_list = 9;
+  repeated QuantityElement quantity_list = 10;
+  repeated Source source_list = 11;
+  repeated Destination destination_list = 12;
+  repeated SensorElement sensor_element_list = 13;
+}
+
+message TransactionEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string parent_id = 4;
+  string action = 5;
+  string biz_step = 6;
+  string disposition = 7;
+  string read_point = 8;
+  string biz_location = 9;
+}
+
+message CreateTransactionEventRequest {
+  string event_id = 1;
+  string event_time_zone_offset = 2;
+  string certification = 3;
+  string event_time = 4;
+  string reason = 5;
+  string declaration_time = 6;
+  string parent_id = 7;
+  string action = 8;
+  string biz_step = 9;
+  string disposition = 10;
+  string read_point = 11;
+  string biz_location = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+  repeated CreatePersistentDispositionRequest persistent_dispositions = 16;
+  repeated CreateEpcRequest epc_list = 17;
+  repeated CreateBizTransactionRequest biz_transaction_list = 18;
+  repeated CreateQuantityElementRequest quantity_list = 19;
+  repeated CreateSourceRequest source_list = 20;
+  repeated CreateDestinationRequest destination_list = 21;
+  repeated CreateSensorElementRequest sensor_element_list = 22;
+}
+
+message CreateTransactionEventResponse {
+  TransactionEvent transaction_event = 1;
+}
+
+message GetTransactionEventRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetTransactionEventResponse {
+  TransactionEvent transaction_event = 1;
+}
+
+message GetTransactionEventsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetTransactionEventsResponse {
+  repeated TransactionEvent transaction_events = 1;
+  string next_cursor = 2;
+}
+
+message TransformationEvent {
+  common.v1.EpcisEventD epcis_event_d = 1;
+  common.v1.EpcisEventT epcis_event_t = 2;
+  common.v1.ErrorDeclarationD error_declaration_d = 3;
+  common.v1.ErrorDeclarationT error_declaration_t = 4;
+  TransformationEventD transformation_event_d = 5;
+  common.v1.CrUpdUser cr_upd_user = 6;
+  repeated Epc input_epc_list = 7;
+  repeated QuantityElement input_quantity_list = 8;
+  repeated Epc output_epc_list = 9;
+  repeated QuantityElement output_quantity_list = 10;
+  repeated PersistentDisposition persistent_dispositions = 11;
+  repeated BizTransaction biz_transaction_list = 12;
+  repeated Source source_list = 13;
+  repeated Destination destination_list = 14;
+  repeated SensorElement sensor_element_list = 15;
+}
+
+message TransformationEventD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string transformation_id = 4;
+  string biz_step = 5;
+  string disposition = 6;
+  string read_point = 7;
+  string biz_location = 8;
+  string ilmd = 9;
+}
+
+message CreateTransformationEventRequest {
+  string event_id = 1;
+  string event_time_zone_offset = 2;
+  string certification = 3;
+  string event_time = 4;
+  string reason = 5;
+  string declaration_time = 6;
+  string transformation_id = 7;
+  string biz_step = 8;
+  string disposition = 9;
+  string read_point = 10;
+  string biz_location = 11;
+  string ilmd = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+  repeated CreateEpcRequest input_epc_list = 16;
+  repeated CreateQuantityElementRequest input_quantity_list = 17;
+  repeated CreateEpcRequest output_epc_list = 18;
+  repeated CreateQuantityElementRequest output_quantity_list = 19;
+  repeated CreatePersistentDispositionRequest persistent_dispositions = 20;
+  repeated CreateBizTransactionRequest biz_transaction_list = 21;
+  repeated CreateSourceRequest source_list = 22;
+  repeated CreateDestinationRequest destination_list = 23;
+  repeated CreateSensorElementRequest sensor_element_list = 24;
+}
+
+message CreateTransformationEventResponse {
+  TransformationEvent transformation_event = 1;
+}
+
+message GetTransformationEventRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetTransformationEventResponse {
+  TransformationEvent transformation_event = 1;
+}
+
+message GetTransformationEventsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetTransformationEventsResponse {
+  repeated TransformationEvent transformation_events = 1;
+  string next_cursor = 2;
+}
+
+message PersistentDisposition {
+  string set_disp = 1;
+  string unset_disp = 2;
+  uint32 event_id = 3;
+  string type_of_event = 4;
+}
+
+message CreatePersistentDispositionRequest {
+  string set_disp = 1;
+  string unset_disp = 2;
+  uint32 event_id = 3;
+  string type_of_event = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreatePersistentDispositionResponse {
+  PersistentDisposition persistent_disposition = 1;
+}
+
+message GetPersistentDispositionsRequest {
+  uint32 event_id = 1;
+  string type_of_event = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetPersistentDispositionsResponse {
+  repeated PersistentDisposition persistent_dispositions = 1;
+}
+
+message Epc {
+  string epc_value = 1;
+  uint32 event_id = 2;
+  string type_of_event = 3;
+  string type_of_epc = 4;
+}
+
+message CreateEpcRequest {
+  string epc_value = 1;
+  uint32 event_id = 2;
+  string type_of_event = 3;
+  string type_of_epc = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateEpcResponse {
+  Epc epc = 1;
+}
+
+message GetEpcsRequest {
+  uint32 event_id = 1;
+  string type_of_event = 2;
+  string type_of_epc = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message GetEpcsResponse {
+  repeated Epc epcs = 1;
+}
+
+message BizTransaction {
+  string biz_transaction_type = 1;
+  string biz_transaction = 2;
+  uint32 event_id = 3;
+  string type_of_event = 4;
+}
+
+message CreateBizTransactionRequest {
+  string biz_transaction_type = 1;
+  string biz_transaction = 2;
+  uint32 event_id = 3;
+  string type_of_event = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateBizTransactionResponse {
+  BizTransaction biz_transaction = 1;
+}
+
+message GetBizTransactionsRequest {
+  uint32 event_id = 1;
+  string type_of_event = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetBizTransactionsResponse {
+  repeated BizTransaction biz_transactions = 1;
+}
+
+message QuantityElement {
+  string epc_class = 1;
+  double quantity = 2;
+  string uom = 3;
+  uint32 event_id = 4;
+  string type_of_event = 5;
+  string type_of_quantity = 6;
+}
+
+message CreateQuantityElementRequest {
+  string epc_class = 1;
+  double quantity = 2;
+  string uom = 3;
+  uint32 event_id = 4;
+  string type_of_event = 5;
+  string type_of_quantity = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateQuantityElementResponse {
+  QuantityElement quantity_element = 1;
+}
+
+message GetQuantityElementsRequest {
+  uint32 event_id = 1;
+  string type_of_event = 2;
+  string type_of_quantity = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message GetQuantityElementsResponse {
+  repeated QuantityElement quantity_elements = 1;
+}
+
+message Source {
+  string source_type = 1;
+  string source = 2;
+  uint32 event_id = 3;
+  string type_of_event = 4;
+}
+
+message CreateSourceRequest {
+  string source_type = 1;
+  string source = 2;
+  uint32 event_id = 3;
+  string type_of_event = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateSourceResponse {
+  Source source = 1;
+}
+
+message GetSourcesRequest {
+  uint32 event_id = 1;
+  string type_of_event = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetSourcesResponse {
+  repeated Source sources = 1;
+}
+
+message Destination {
+  string dest_type = 1;
+  string destination = 2;
+  uint32 event_id = 3;
+  string type_of_event = 4;
+}
+
+message CreateDestinationRequest {
+  string dest_type = 1;
+  string destination = 2;
+  uint32 event_id = 3;
+  string type_of_event = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateDestinationResponse {
+  Destination destination = 1;
+}
+
+message GetDestinationsRequest {
+  uint32 event_id = 1;
+  string type_of_event = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetDestinationsResponse {
+  repeated Destination destinations = 1;
+}
+
+message SensorElement {
+  common.v1.SensorMetadataD sensor_metadata_d = 1;
+  common.v1.SensorMetadataT sensor_metadata_t = 2;
+  SensorElementD sensor_element_d = 3;
+  repeated SensorReport sensor_reports = 4;
+}
+
+message SensorElementD {
+  uint32 id = 1;
+  uint32 event_id = 2;
+  string type_of_event = 3;
+}
+
+message CreateSensorElementRequest {
+  string device_id = 1;
+  string device_metadata = 2;
+  string raw_data = 3;
+  string data_processing_method = 4;
+  string biz_rules = 5;
+  string sensor_time = 6;
+  string start_time = 7;
+  string end_time = 8;
+  uint32 event_id = 9;
+  string type_of_event = 10;
+  string user_id = 11;
+  string user_email = 12;
+  string request_id = 13;
+  repeated CreateSensorReportRequest sensor_reports = 14;
+}
+
+message CreateSensorElementResponse {
+  SensorElement sensor_element = 1;
+}
+
+message GetSensorElementsRequest {
+  uint32 event_id = 1;
+  string type_of_event = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetSensorElementsResponse {
+  repeated SensorElement sensor_elements = 1;
+}
+
+message SensorReport {
+  SensorReportD sensor_report_d = 1;
+  SensorReportT sensor_report_t = 2;
+}
+
+message CreateSensorReportRequest {
+  string sensor_report_type = 1;
+  string device_id = 2;
+  string raw_data = 3;
+  string data_processing_method = 4;
+  string microorganism = 5;
+  string chemical_substance = 6;
+  double sensor_value = 7;
+  string component = 8;
+  string string_value = 9;
+  bool boolean_value = 10;
+  string hex_binary_value = 11;
+  string uri_value = 12;
+  double min_value = 13;
+  double max_value = 14;
+  double mean_value = 15;
+  double perc_rank = 16;
+  double perc_value = 17;
+  string uom = 18;
+  double s_dev = 19;
+  string device_metadata = 20;
+  uint32 sensor_element_id = 21;
+  string sensor_report_time = 22;
+  string user_id = 23;
+  string user_email = 24;
+  string request_id = 25;
+}
+
+message SensorReportD {
+  string sensor_report_type = 1;
+  string device_id = 2;
+  string raw_data = 3;
+  string data_processing_method = 4;
+  string microorganism = 5;
+  string chemical_substance = 6;
+  double sensor_value = 7;
+  string component = 8;
+  string string_value = 9;
+  bool boolean_value = 10;
+  string hex_binary_value = 11;
+  string uri_value = 12;
+  double min_value = 13;
+  double max_value = 14;
+  double mean_value = 15;
+  double perc_rank = 16;
+  double perc_value = 17;
+  string uom = 18;
+  double s_dev = 19;
+  string device_metadata = 20;
+  uint32 sensor_element_id = 21;
+}
+
+message SensorReportT {
+  google.protobuf.Timestamp sensor_report_time = 1;
+}

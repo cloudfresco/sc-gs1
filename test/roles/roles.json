@@ -1,0 +1,222 @@
+{"roles": 
+    [
+      {
+        "role_name": "EpcisCud",
+        "role_description": "create or update or delete Epcis",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "epcis:cud",
+        "permission_description": "create or update or delete Epcis",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "EpcisRead",
+        "role_description": "read Epcis",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "epcis:read",
+        "permission_description": "read Epcis",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "InventoryCud",
+        "role_description": "create or update or delete Inventory",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "inventory:cud",
+        "permission_description": "create or update or delete Inventory",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "InventoryRead",
+        "role_description": "read Inventory",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "inventory:read",
+        "permission_description": "read Inventory",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "DebitCreditAdviceCud",
+        "role_description": "create or update or delete DebitCreditAdvice",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "dca:cud",
+        "permission_description": "create or update or delete DebitCreditAdvice",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "DebitCreditAdviceRead",
+        "role_description": "read DebitCreditAdvice",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "dca:read",
+        "permission_description": "read DebitCreditAdvice",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "InvoiceCud",
+        "role_description": "create or update or delete Invoice",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "invoice:cud",
+        "permission_description": "create or update or delete Invoice",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "InvoiceRead",
+        "role_description": "read Invoice",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "invoice:read",
+        "permission_description": "read Invoice",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "DespatchAdviceCud",
+        "role_description": "create or update or delete DespatchAdvice",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "despadv:cud",
+        "permission_description": "create or update or delete DespatchAdvice",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "DespatchAdviceRead",
+        "role_description": "read DespatchAdvice",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "despadv:read",
+        "permission_description": "read DespatchAdvice",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+
+      {
+        "role_name": "ReceivingAdviceCud",
+        "role_description": "create or update or delete ReceivingAdvice",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "rcvadv:cud",
+        "permission_description": "create or update or delete ReceivingAdvice",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "ReceivingAdviceRead",
+        "role_description": "read ReceivingAdvice",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "rcvadv:read",
+        "permission_description": "read ReceivingAdvice",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+
+      {
+        "role_name": "FishCud",
+        "role_description": "create or update or delete Fish",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "fish:cud",
+        "permission_description": "create or update or delete Fish",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "FishRead",
+        "role_description": "read Fish",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "fish:read",
+        "permission_description": "read Fish",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "MeatCud",
+        "role_description": "create or update or delete Meat",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "meat:cud",
+        "permission_description": "create or update or delete Meat",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "MeatRead",
+        "role_description": "read Meat",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "meat:read",
+        "permission_description": "read Meat",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "OrderCud",
+        "role_description": "create or update or delete Order",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "order:cud",
+        "permission_description": "create or update or delete Order",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "OrderRead",
+        "role_description": "read Order",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "order:read",
+        "permission_description": "read Order",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "OrderResponseCud",
+        "role_description": "create or update or delete OrderResponse",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "orderresp:cud",
+        "permission_description": "create or update or delete OrderResponse",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+      {
+        "role_name": "OrderResponseRead",
+        "role_description": "read OrderResponse",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "orderresp:read",
+        "permission_description": "read OrderResponse",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]      
+      },
+
+
+      {
+        "role_name": "UsersCud",
+        "role_description": "create or update or delete Users",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "users:cud",
+        "permission_description": "create or update or delete Users",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]
+      },
+
+      {
+        "role_name": "UsersRead",
+        "role_description": "read Users",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "users:read",
+        "permission_description": "read Users",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832"]
+      },
+
+      {
+        "role_name": "PartiesCud",
+        "role_description": "create or update or delete Parties",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "parties:cud",
+        "permission_description": "create or update or delete Parties",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832", "auth0|673ee186e91ec526849a975a"]
+      },
+
+      {
+        "role_name": "PartiesRead",
+        "role_description": "read Parties",
+        "resource_server_identifier": "https://scgs1.com",
+        "permission_name": "parties:read",
+        "permission_description": "read Parties",
+        "user_ids": ["auth0|673ee1a719dd4000cd5a3832", "auth0|673ee186e91ec526849a975a"]
+      }
+    ]
+}

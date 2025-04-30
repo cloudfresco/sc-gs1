@@ -1,0 +1,262 @@
+syntax = "proto3";
+
+package party.v1;
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/party/v1";
+
+// The PartyService service definition.
+service PartyService {
+  rpc CreateTransactionalParty(CreateTransactionalPartyRequest) returns (CreateTransactionalPartyResponse);
+  rpc CreateAdditionalPartyIdentification(CreateAdditionalPartyIdentificationRequest) returns (CreateAdditionalPartyIdentificationResponse);
+  rpc CreateAddress(CreateAddressRequest) returns (CreateAddressResponse);
+  rpc CreateCommunicationChannel(CreateCommunicationChannelRequest) returns (CreateCommunicationChannelResponse);
+  rpc CreateContact(CreateContactRequest) returns (CreateContactResponse);
+  rpc CreateDutyFeeTaxRegistration(CreateDutyFeeTaxRegistrationRequest) returns (CreateDutyFeeTaxRegistrationResponse);
+  rpc CreateFinancialInstitutionInformation(CreateFinancialInstitutionInformationRequest) returns (CreateFinancialInstitutionInformationResponse);
+  rpc CreateLegalRegistration(CreateLegalRegistrationRequest) returns (CreateLegalRegistrationResponse);
+  rpc CreateOrganisation(CreateOrganisationRequest) returns (CreateOrganisationResponse);
+}
+
+message TransactionalParty {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string gln = 4;
+}
+
+message CreateTransactionalPartyRequest {
+  string gln = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message CreateTransactionalPartyResponse {
+  TransactionalParty transactional_party = 1;
+}
+
+message AdditionalPartyIdentification {
+  uint32 id = 1;
+  string additional_party_identification = 2;
+  string additional_party_identification_type_code = 3;
+  string code_list_version = 4;
+  string gln = 5;
+  uint32 transactional_party_id = 6;
+}
+
+message CreateAdditionalPartyIdentificationRequest {
+  string additional_party_identification = 1;
+  string additional_party_identification_type_code = 2;
+  string code_list_version = 3;
+  string gln = 4;
+  uint32 transactional_party_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateAdditionalPartyIdentificationResponse {
+  AdditionalPartyIdentification additional_party_identification = 1;
+}
+
+message Address {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string city = 4;
+  string city_code = 5;
+  string country_code = 6;
+  string county_code = 7;
+  string cross_street = 8;
+  string currency_of_party_code = 9;
+  string language_of_the_party_code = 10;
+  string name = 11;
+  string p_o_box_number = 12;
+  string postal_code = 13;
+  string province_code = 14;
+  string state = 15;
+  string street_address_one = 16;
+  string street_address_three = 17;
+  string street_address_two = 18;
+  string latitude = 19;
+  string longitude = 20;
+  uint32 transactional_party_id = 21;
+}
+
+message CreateAddressRequest {
+  string city = 1;
+  string city_code = 2;
+  string country_code = 3;
+  string county_code = 4;
+  string cross_street = 5;
+  string currency_of_party_code = 6;
+  string language_of_the_party_code = 7;
+  string name = 8;
+  string p_o_box_number = 9;
+  string postal_code = 10;
+  string province_code = 11;
+  string state = 12;
+  string street_address_one = 13;
+  string street_address_three = 14;
+  string street_address_two = 15;
+  string latitude = 16;
+  string longitude = 17;
+  uint32 transactional_party_id = 18;
+  string user_id = 19;
+  string user_email = 20;
+  string request_id = 21;
+}
+
+message CreateAddressResponse {
+  Address address = 1;
+}
+
+message CommunicationChannel {
+  uint32 id = 1;
+  string communication_channel_code = 2;
+  string communication_channel_name = 3;
+  string communication_value = 4;
+  uint32 contact_id = 5;
+}
+
+message CreateCommunicationChannelRequest {
+  string communication_channel_code = 1;
+  string communication_channel_name = 2;
+  string communication_value = 3;
+  uint32 contact_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateCommunicationChannelResponse {
+  CommunicationChannel communication_channel = 1;
+}
+
+message Contact {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string contact_type_code = 4;
+  string department_name = 5;
+  string job_title = 6;
+  string person_name = 7;
+  uint32 transactional_party_id = 8;
+}
+
+message CreateContactRequest {
+  string contact_type_code = 1;
+  string department_name = 2;
+  string job_title = 3;
+  string person_name = 4;
+  uint32 transactional_party_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateContactResponse {
+  Contact contact = 1;
+}
+
+message DutyFeeTaxRegistration {
+  uint32 id = 1;
+  string duty_fee_tax_agency_name = 2;
+  string duty_fee_tax_description = 3;
+  string duty_fee_tax_registration_type = 4;
+  string duty_fee_tax_type_code = 5;
+  uint32 transactional_party_id = 6;
+}
+
+message CreateDutyFeeTaxRegistrationRequest {
+  string duty_fee_tax_agency_name = 1;
+  string duty_fee_tax_description = 2;
+  string duty_fee_tax_registration_type = 4;
+  string duty_fee_tax_type_code = 5;
+  uint32 transactional_party_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateDutyFeeTaxRegistrationResponse {
+  DutyFeeTaxRegistration duty_fee_tax_registration = 1;
+}
+
+message FinancialInstitutionInformation {
+  uint32 id = 1;
+  string financial_institution_branch_name = 2;
+  string financial_institution_name = 3;
+  uint32 address = 4;
+  string financial_routing_number = 5;
+  string financial_routing_number_type_code = 6;
+  string financial_account_name = 7;
+  string financial_account_number = 8;
+  string financial_account_number_type_code = 9;
+  uint32 transactional_party_id = 10;
+}
+
+message CreateFinancialInstitutionInformationRequest {
+  string financial_institution_branch_name = 1;
+  string financial_institution_name = 2;
+  uint32 address = 3;
+  string financial_routing_number = 4;
+  string financial_routing_number_type_code = 5;
+  string financial_account_name = 6;
+  string financial_account_number = 7;
+  string financial_account_number_type_code = 8;
+  uint32 transactional_party_id = 9;
+  string user_id = 10;
+  string user_email = 11;
+  string request_id = 12;
+}
+
+message CreateFinancialInstitutionInformationResponse {
+  FinancialInstitutionInformation financial_institution_information = 1;
+}
+
+message LegalRegistration {
+  uint32 id = 1;
+  string legal_registration_additional_information = 2;
+  string legal_registration_number = 3;
+  string legal_registration_type = 4;
+}
+
+message CreateLegalRegistrationRequest {
+  string legal_registration_additional_information = 1;
+  string legal_registration_number = 2;
+  string legal_registration_type = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateLegalRegistrationResponse {
+  LegalRegistration legal_registration = 1;
+}
+
+message Organisation {
+  uint32 id = 1;
+  double issued_capital = 2;
+  string i_c_code_list_version = 3;
+  string i_c_currency_code = 4;
+  string organisation_name = 5;
+  uint32 official_address = 6;
+  uint32 transactional_party_id = 7;
+}
+
+message CreateOrganisationRequest {
+  double issued_capital = 1;
+  string i_c_code_list_version = 2;
+  string i_c_currency_code = 3;
+  string organisation_name = 4;
+  uint32 official_address = 5;
+  uint32 transactional_party_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateOrganisationResponse {
+  Organisation organisation = 1;
+}

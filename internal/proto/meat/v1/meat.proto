@@ -1,0 +1,361 @@
+syntax = "proto3";
+
+package meat.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/meat/v1";
+
+// The MeatService service definition.
+service MeatService {
+  rpc CreateMeatAcidity(CreateMeatAcidityRequest) returns (CreateMeatAcidityResponse);
+  rpc CreateMeatActivityHistory(CreateMeatActivityHistoryRequest) returns (CreateMeatActivityHistoryResponse);
+  rpc CreateMeatBreedingDetail(CreateMeatBreedingDetailRequest) returns (CreateMeatBreedingDetailResponse);
+  rpc CreateMeatCuttingDetail(CreateMeatCuttingDetailRequest) returns (CreateMeatCuttingDetailResponse);
+  rpc CreateMeatDespatchAdviceLineItemExtension(CreateMeatDespatchAdviceLineItemExtensionRequest) returns (CreateMeatDespatchAdviceLineItemExtensionResponse);
+  rpc CreateMeatFatteningDetail(CreateMeatFatteningDetailRequest) returns (CreateMeatFatteningDetailResponse);
+  rpc CreateMeatMincingDetail(CreateMeatMincingDetailRequest) returns (CreateMeatMincingDetailResponse);
+  rpc CreateMeatProcessingParty(CreateMeatProcessingPartyRequest) returns (CreateMeatProcessingPartyResponse);
+  rpc CreateMeatSlaughteringDetail(CreateMeatSlaughteringDetailRequest) returns (CreateMeatSlaughteringDetailResponse);
+  rpc CreateMeatTest(CreateMeatTestRequest) returns (CreateMeatTestResponse);
+  rpc CreateMeatWorkItemIdentification(CreateMeatWorkItemIdentificationRequest) returns (CreateMeatWorkItemIdentificationResponse);
+}
+
+message MeatAcidity {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 acidity_measurement_time = 4;
+  double acidity_of_meat = 5;
+  uint32 meat_slaughtering_detail_id = 6;
+}
+
+message CreateMeatAcidityRequest {
+  uint32 acidity_measurement_time = 1;
+  double acidity_of_meat = 2;
+  uint32 meat_slaughtering_detail_id = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateMeatAcidityResponse {
+  MeatAcidity meat_acidity = 1;
+}
+
+message MeatActivityHistory {
+  MeatActivityHistoryD meat_activity_history_d = 1;
+  MeatActivityHistoryT meat_activity_history_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message MeatActivityHistoryD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 activity_sub_step_identification = 4;
+  string country_of_activity_code = 5;
+  uint32 current_step_identification = 6;
+  string meat_processing_activity_type_code = 7;
+  string movement_reason_code = 8;
+  uint32 next_step_identification = 9;
+  uint32 meat_mincing_detail_id = 10;
+  uint32 meat_fattening_detail_id = 11;
+  uint32 meat_cutting_detail_id = 12;
+  uint32 meat_breeding_detail_id = 13;
+  uint32 meat_processing_party_id = 14;
+  uint32 meat_work_item_identification_id = 15;
+  uint32 meat_slaughtering_detail_id = 16;
+  uint32 meat_despatch_advice_line_item_extension_id = 17;
+}
+
+message MeatActivityHistoryT {
+  google.protobuf.Timestamp date_of_arrival = 1;
+  google.protobuf.Timestamp date_of_departure = 2;
+}
+
+message CreateMeatActivityHistoryRequest {
+  uint32 activity_sub_step_identification = 1;
+  string country_of_activity_code = 2;
+  uint32 current_step_identification = 3;
+  string date_of_arrival = 4;
+  string date_of_departure = 5;
+  string meat_processing_activity_type_code = 6;
+  string movement_reason_code = 7;
+  uint32 next_step_identification = 8;
+  uint32 meat_mincing_detail_id = 9;
+  uint32 meat_fattening_detail_id = 10;
+  uint32 meat_cutting_detail_id = 11;
+  uint32 meat_breeding_detail_id = 12;
+  uint32 meat_processing_party_id = 13;
+  uint32 meat_work_item_identification_id = 14;
+  uint32 meat_slaughtering_detail_id = 15;
+  uint32 meat_despatch_advice_line_item_extension_id = 16;
+  string user_id = 17;
+  string user_email = 18;
+  string request_id = 19;
+}
+
+message CreateMeatActivityHistoryResponse {
+  MeatActivityHistory meat_activity_history = 1;
+}
+
+message MeatBreedingDetail {
+  MeatBreedingDetailD meat_breeding_detail_d = 1;
+  MeatBreedingDetailT meat_breeding_detail_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message MeatBreedingDetailD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string animal_type_code = 4;
+  string breed_code = 5;
+  string breed_of_father_code = 6;
+  string breed_of_mother_code = 7;
+  bool cross_breed_indicator = 8;
+  string feeding_system_code = 9;
+  string gender_code = 10;
+  string housing_system_code = 11;
+  uint32 breeding_d_n_a_test = 12;
+}
+
+message MeatBreedingDetailT {
+  google.protobuf.Timestamp date_of_birth = 1;
+}
+
+message CreateMeatBreedingDetailRequest {
+  string animal_type_code = 1;
+  string breed_code = 2;
+  string breed_of_father_code = 3;
+  string breed_of_mother_code = 4;
+  bool cross_breed_indicator = 5;
+  string feeding_system_code = 6;
+  string gender_code = 7;
+  string housing_system_code = 8;
+  uint32 breeding_d_n_a_test = 9;
+  string date_of_birth = 10;
+  string user_id = 11;
+  string user_email = 12;
+  string request_id = 13;
+}
+
+message CreateMeatBreedingDetailResponse {
+  MeatBreedingDetail meat_breeding_detail = 1;
+}
+
+message MeatCuttingDetail {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string meat_profile_code = 4;
+}
+
+message CreateMeatCuttingDetailRequest {
+  string meat_profile_code = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message CreateMeatCuttingDetailResponse {
+  MeatCuttingDetail meat_cutting_detail = 1;
+}
+
+message MeatDespatchAdviceLineItemExtension {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 animal_identification_id = 4;
+  uint32 slaughter_number_id = 5;
+}
+
+message CreateMeatDespatchAdviceLineItemExtensionRequest {
+  uint32 animal_identification_id = 1;
+  uint32 slaughter_number_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateMeatDespatchAdviceLineItemExtensionResponse {
+  MeatDespatchAdviceLineItemExtension meat_despatch_advice_line_item_extension = 1;
+}
+
+message MeatFatteningDetail {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string feeding_system_code = 4;
+  string housing_system_code = 5;
+}
+
+message CreateMeatFatteningDetailRequest {
+  string feeding_system_code = 1;
+  string housing_system_code = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateMeatFatteningDetailResponse {
+  MeatFatteningDetail meat_fattening_detail = 1;
+}
+
+message MeatMincingDetail {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  double fat_content_percent = 4;
+  string mincing_type_code = 5;
+}
+
+message CreateMeatMincingDetailRequest {
+  double fat_content_percent = 1;
+  string mincing_type_code = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateMeatMincingDetailResponse {
+  MeatMincingDetail meat_mincing_detail = 1;
+}
+
+message MeatProcessingParty {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string approval_number = 4;
+  string meat_processing_party_identification_type_code = 5;
+  string meat_processing_party_type_code = 6;
+  uint32 transactional_party_id = 7;
+}
+
+message CreateMeatProcessingPartyRequest {
+  string approval_number = 1;
+  string meat_processing_party_identification_type_code = 2;
+  string meat_processing_party_type_code = 3;
+  uint32 transactional_party_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateMeatProcessingPartyResponse {
+  MeatProcessingParty meat_processing_party = 1;
+}
+
+message MeatSlaughteringDetail {
+  MeatSlaughteringDetailD meat_slaughtering_detail_d = 1;
+  MeatSlaughteringDetailT meat_slaughtering_detail_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message MeatSlaughteringDetailD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 age_of_animal = 4;
+  double fat_content_percent = 5;
+  string fat_cover_code = 6;
+  string meat_category_code = 7;
+  string meat_colour_code = 8;
+  string meat_conformation_code = 9;
+  string meat_profile_code = 10;
+  string slaughtering_system_code = 11;
+  double slaughtering_weight = 12;
+  string s_w_code_list_version = 13;
+  string s_w_measurement_unit_code = 14;
+  uint32 bse_test_id = 15;
+  uint32 slaughtering_d_n_a_test_id = 16;
+}
+
+message MeatSlaughteringDetailT {
+  google.protobuf.Timestamp date_of_slaughtering = 1;
+  google.protobuf.Timestamp optimum_maturation_date = 2;
+}
+
+message CreateMeatSlaughteringDetailRequest {
+  uint32 age_of_animal = 1;
+  string date_of_slaughtering = 2;
+  double fat_content_percent = 3;
+  string fat_cover_code = 4;
+  string meat_category_code = 5;
+  string meat_colour_code = 6;
+  string meat_conformation_code = 7;
+  string meat_profile_code = 8;
+  string optimum_maturation_date = 9;
+  string slaughtering_system_code = 10;
+  double slaughtering_weight = 11;
+  string s_w_code_list_version = 12;
+  string s_w_measurement_unit_code = 13;
+  uint32 bse_test_id = 14;
+  uint32 slaughtering_d_n_a_test_id = 15;
+  string user_id = 16;
+  string user_email = 17;
+  string request_id = 18;
+}
+
+message CreateMeatSlaughteringDetailResponse {
+  MeatSlaughteringDetail meat_slaughtering_detail = 1;
+}
+
+message MeatTest {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string test_method = 4;
+  string test_result = 5;
+}
+
+message CreateMeatTestRequest {
+  string test_method = 1;
+  string test_result = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateMeatTestResponse {
+  MeatTest meat_test = 1;
+}
+
+message MeatWorkItemIdentification {
+  MeatWorkItemIdentificationD meat_work_item_identification_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message MeatWorkItemIdentificationD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string batch_number = 4;
+  string livestock_mob_identifier = 5;
+  string meat_work_item_type_code = 6;
+  uint32 animal_identification_id = 7;
+  uint32 product_identification = 8;
+  uint32 slaughter_number_id = 9;
+}
+
+message CreateMeatWorkItemIdentificationRequest {
+  string batch_number = 1;
+  string livestock_mob_identifier = 2;
+  string meat_work_item_type_code = 3;
+  uint32 animal_identification_id = 4;
+  uint32 product_identification = 5;
+  uint32 slaughter_number_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateMeatWorkItemIdentificationResponse {
+  MeatWorkItemIdentification meat_work_item_identification = 1;
+}

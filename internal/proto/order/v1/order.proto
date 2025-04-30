@@ -1,0 +1,381 @@
+syntax = "proto3";
+
+package order.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/order/v1";
+
+// The OrderService service definition.
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse);
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+  rpc GetOrderByPk(GetOrderByPkRequest) returns (GetOrderByPkResponse);
+  rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
+  rpc CreateOrderLineItem(CreateOrderLineItemRequest) returns (CreateOrderLineItemResponse);
+  rpc GetOrderLineItems(GetOrderLineItemsRequest) returns (GetOrderLineItemsResponse);
+  rpc CreateOrderLineItemDetail(CreateOrderLineItemDetailRequest) returns (CreateOrderLineItemDetailResponse);
+  rpc CreateOrderLogisticalInformation(CreateOrderLogisticalInformationRequest) returns (CreateOrderLogisticalInformationResponse);
+  rpc CreateOrderLogisticalDateInformation(CreateOrderLogisticalDateInformationRequest) returns (CreateOrderLogisticalDateInformationResponse);
+}
+
+message Order {
+  OrderD order_d = 1;
+  OrderT order_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message OrderD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  bool is_application_receipt_acknowledgement_required = 4;
+  bool is_order_free_of_excise_tax_duty = 5;
+  string order_change_reason_code = 6;
+  string order_entry_type = 7;
+  string order_instruction_code = 8;
+  string order_priority = 9;
+  string order_type_code = 10;
+  double total_monetary_amount_excluding_taxes = 11;
+  string tmaet_code_list_version = 12;
+  string tmaet_currency_code = 13;
+  double total_monetary_amount_including_taxes = 14;
+  string tmait_code_list_version = 15;
+  string tmait_currency_code = 16;
+  double total_tax_amount = 17;
+  string tta_code_list_version = 18;
+  string tta_currency_code = 19;
+  uint32 bill_to = 20;
+  uint32 buyer = 21;
+  uint32 contract = 22;
+  uint32 customer_document_reference = 23;
+  uint32 customs_broker = 24;
+  uint32 order_identification = 25;
+  uint32 pickup_from = 26;
+  uint32 promotional_deal = 27;
+  string quote_number = 28;
+  uint32 seller = 29;
+  string trade_agreement = 30;
+}
+
+message OrderT {
+  google.protobuf.Timestamp delivery_date_according_to_schedule = 1;
+  google.protobuf.Timestamp latest_delivery_date = 2;
+}
+
+message CreateOrderRequest {
+  bool is_application_receipt_acknowledgement_required = 1;
+  bool is_order_free_of_excise_tax_duty = 2;
+  string order_change_reason_code = 3;
+  string order_entry_type = 4;
+  string order_instruction_code = 5;
+  string order_priority = 6;
+  string order_type_code = 7;
+  double total_monetary_amount_excluding_taxes = 8;
+  string tmaet_code_list_version = 9;
+  string tmaet_currency_code = 10;
+  double total_monetary_amount_including_taxes = 11;
+  string tmait_code_list_version = 12;
+  string tmait_currency_code = 13;
+  double total_tax_amount = 14;
+  string tta_code_list_version = 15;
+  string tta_currency_code = 16;
+  uint32 bill_to = 17;
+  uint32 buyer = 18;
+  uint32 contract = 19;
+  uint32 customer_document_reference = 20;
+  uint32 customs_broker = 21;
+  string delivery_date_according_to_schedule = 22;
+  string latest_delivery_date = 23;
+  uint32 order_identification = 24;
+  uint32 pickup_from = 25;
+  uint32 promotional_deal = 26;
+  string quote_number = 27;
+  uint32 seller = 28;
+  string trade_agreement = 29;
+  string user_id = 30;
+  string user_email = 31;
+  string request_id = 32;
+  repeated CreateOrderLineItemRequest order_line_items = 33;
+}
+
+message CreateOrderResponse {
+  Order order = 1;
+}
+
+message GetOrdersResponse {
+  repeated Order orders = 1;
+  string next_cursor = 2;
+}
+
+message GetOrdersRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetOrderRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+message GetOrderByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetOrderByPkResponse {
+  Order order = 1;
+}
+
+message UpdateOrderRequest {
+  string order_change_reason_code = 1;
+  string order_entry_type = 2;
+  string order_instruction_code = 3;
+  string order_priority = 4;
+  string order_type_code = 5;
+  double total_monetary_amount_excluding_taxes = 6;
+  string tmaet_code_list_version = 7;
+  string tmaet_currency_code = 8;
+  double total_monetary_amount_including_taxes = 9;
+  string tmait_code_list_version = 10;
+  string tmait_currency_code = 11;
+  double total_tax_amount = 12;
+  string tta_code_list_version = 13;
+  string tta_currency_code = 14;
+  string id = 15;
+  string user_id = 16;
+  string user_email = 17;
+  string request_id = 18;
+}
+
+message UpdateOrderResponse {}
+
+message CreateOrderLineItemRequest {
+  string extension = 1;
+  double free_goods_quantity = 2;
+  string fgq_measurement_unit_code = 3;
+  string fgq_code_list_version = 4;
+  double item_price_base_quantity = 5;
+  string ipbq_measurement_unit_code = 6;
+  string ipbq_code_list_version = 7;
+  string item_source_code = 8;
+  string line_item_action_code = 9;
+  uint32 line_item_number = 10;
+  double list_price = 11;
+  string lp_code_list_version = 12;
+  string lp_currency_code = 13;
+  double monetary_amount_excluding_taxes = 14;
+  string maet_code_list_version = 15;
+  string maet_currency_code = 16;
+  double monetary_amount_including_taxes = 17;
+  string mait_code_list_version = 18;
+  string mait_currency_code = 19;
+  double net_amount = 20;
+  string na_code_list_version = 21;
+  string na_currency_code = 22;
+  double net_price = 23;
+  string np_code_list_version = 24;
+  string np_currency_code = 25;
+  string order_instruction_code = 26;
+  string order_line_item_instruction_code = 27;
+  string order_line_item_priority = 28;
+  uint32 parent_line_item_number = 29;
+  double recommended_retail_price = 30;
+  double requested_quantity = 31;
+  string rq_measurement_unit_code = 32;
+  string rq_code_list_version = 33;
+  string return_reason_code = 34;
+  uint32 contract = 35;
+  uint32 customer_document_reference = 36;
+  uint32 delivery_date_according_to_schedule = 37;
+  uint32 despatch_advice = 38;
+  string latest_delivery_date = 39;
+  uint32 material_specification = 40;
+  uint32 order_line_item_contact = 41;
+  uint32 preferred_manufacturer = 42;
+  uint32 promotional_deal = 43;
+  uint32 purchase_conditions = 44;
+  uint32 returnable_asset_identification = 45;
+  uint32 order_id = 46;
+  string user_id = 47;
+  string user_email = 48;
+  string request_id = 49;
+}
+
+message CreateOrderLineItemResponse {
+  OrderLineItem order_line_item = 1;
+}
+
+message OrderLineItem {
+  OrderLineItemD order_line_item_d = 1;
+  OrderLineItemT order_line_item_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message OrderLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string extension = 4;
+  double free_goods_quantity = 5;
+  string fgq_measurement_unit_code = 6;
+  string fgq_code_list_version = 7;
+  double item_price_base_quantity = 8;
+  string ipbq_measurement_unit_code = 9;
+  string ipbq_code_list_version = 10;
+  string item_source_code = 11;
+  string line_item_action_code = 12;
+  uint32 line_item_number = 13;
+  double list_price = 14;
+  string lp_code_list_version = 15;
+  string lp_currency_code = 16;
+  double monetary_amount_excluding_taxes = 17;
+  string maet_code_list_version = 18;
+  string maet_currency_code = 19;
+  double monetary_amount_including_taxes = 20;
+  string mait_code_list_version = 21;
+  string mait_currency_code = 22;
+  double net_amount = 23;
+  string na_code_list_version = 24;
+  string na_currency_code = 25;
+  double net_price = 26;
+  string np_code_list_version = 27;
+  string np_currency_code = 28;
+  string order_instruction_code = 29;
+  string order_line_item_instruction_code = 30;
+  string order_line_item_priority = 31;
+  uint32 parent_line_item_number = 32;
+  double recommended_retail_price = 33;
+  double requested_quantity = 34;
+  string rq_measurement_unit_code = 35;
+  string rq_code_list_version = 36;
+  string return_reason_code = 37;
+  uint32 contract = 38;
+  uint32 customer_document_reference = 39;
+  uint32 delivery_date_according_to_schedule = 40;
+  uint32 despatch_advice = 41;
+  uint32 material_specification = 42;
+  uint32 order_line_item_contact = 43;
+  uint32 preferred_manufacturer = 44;
+  uint32 promotional_deal = 45;
+  uint32 purchase_conditions = 46;
+  uint32 returnable_asset_identification = 47;
+  uint32 order_id = 48;
+}
+
+message OrderLineItemT {
+  google.protobuf.Timestamp latest_delivery_date = 1;
+}
+
+message GetOrderLineItemsRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetOrderLineItemsResponse {
+  repeated OrderLineItem order_line_items = 1;
+}
+
+message OrderLineItems {
+  repeated OrderLineItem order_line_items = 1;
+}
+
+message CreateOrderLineItemDetailRequest {
+  double requested_quantity = 1;
+  string rq_measurement_unit_code = 2;
+  string rq_code_list_version = 3;
+  uint32 order_line_item_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateOrderLineItemDetailResponse {
+  OrderLineItemDetail order_line_item_detail = 1;
+}
+
+message OrderLineItemDetail {
+  double requested_quantity = 1;
+  string rq_measurement_unit_code = 2;
+  string rq_code_list_version = 3;
+  uint32 order_line_item_id = 4;
+}
+
+message CreateOrderLogisticalDateInformationRequest {
+  string requested_delivery_date_range_begin = 1;
+  string requested_delivery_date_range_end = 2;
+  string requested_delivery_date_range_at_ultimate_consignee_begin = 3;
+  string requested_delivery_date_range_at_ultimate_consignee_end = 4;
+  string requested_delivery_date_time = 5;
+  string requested_delivery_date_time_at_ultimate_consignee = 6;
+  string requested_pick_up_date_time = 7;
+  string requested_ship_date_range_begin = 8;
+  string requested_ship_date_range_end = 9;
+  string requested_ship_date_time = 10;
+  uint32 order_response_id = 11;
+  string user_id = 12;
+  string user_email = 13;
+  string request_id = 14;
+}
+
+message CreateOrderLogisticalDateInformationResponse {
+  OrderLogisticalDateInformation order_logistical_date_information = 1;
+}
+
+message OrderLogisticalDateInformation {
+  OrderLogisticalDateInformationD order_logistical_date_information_d = 1;
+  OrderLogisticalDateInformationT order_logistical_date_information_t = 2;
+}
+
+message OrderLogisticalDateInformationD {
+  uint32 order_response_id = 1;
+}
+
+message OrderLogisticalDateInformationT {
+  google.protobuf.Timestamp requested_delivery_date_range_begin = 1;
+  google.protobuf.Timestamp requested_delivery_date_range_end = 2;
+  google.protobuf.Timestamp requested_delivery_date_range_at_ultimate_consignee_begin = 3;
+  google.protobuf.Timestamp requested_delivery_date_range_at_ultimate_consignee_end = 4;
+  google.protobuf.Timestamp requested_delivery_date_time = 5;
+  google.protobuf.Timestamp requested_delivery_date_time_at_ultimate_consignee = 6;
+  google.protobuf.Timestamp requested_pick_up_date_time = 7;
+  google.protobuf.Timestamp requested_ship_date_range_begin = 8;
+  google.protobuf.Timestamp requested_ship_date_range_end = 9;
+  google.protobuf.Timestamp requested_ship_date_time = 10;
+}
+
+message CreateOrderLogisticalInformationRequest {
+  string commodity_type_code = 1;
+  string shipment_split_method_code = 2;
+  uint32 intermediate_delivery_party = 3;
+  uint32 inventory_location = 4;
+  uint32 ship_from = 5;
+  uint32 ship_to = 6;
+  uint32 ultimate_consignee = 7;
+  uint32 order_id = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+}
+
+message CreateOrderLogisticalInformationResponse {
+  OrderLogisticalInformation order_logistical_information = 1;
+}
+
+message OrderLogisticalInformation {
+  string commodity_type_code = 1;
+  string shipment_split_method_code = 2;
+  uint32 intermediate_delivery_party = 3;
+  uint32 inventory_location = 4;
+  uint32 ship_from = 5;
+  uint32 ship_to = 6;
+  uint32 ultimate_consignee = 7;
+  uint32 order_id = 8;
+}

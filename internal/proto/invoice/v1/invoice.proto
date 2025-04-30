@@ -1,0 +1,591 @@
+syntax = "proto3";
+
+package invoice.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/invoice/v1";
+
+// The InvoiceService service definition.
+service InvoiceService {
+  rpc CreateInvoice(CreateInvoiceRequest) returns (CreateInvoiceResponse);
+  rpc GetInvoices(GetInvoicesRequest) returns (GetInvoicesResponse);
+  rpc GetInvoice(GetInvoiceRequest) returns (GetInvoiceResponse);
+  rpc GetInvoiceByPk(GetInvoiceByPkRequest) returns (GetInvoiceByPkResponse);
+  rpc UpdateInvoice(UpdateInvoiceRequest) returns (UpdateInvoiceResponse);
+  rpc CreateInvoiceLineItem(CreateInvoiceLineItemRequest) returns (CreateInvoiceLineItemResponse);
+  rpc GetInvoiceLineItems(GetInvoiceLineItemsRequest) returns (GetInvoiceLineItemsResponse);
+  rpc CreateInvoiceLineItemInformationAfterTaxes(CreateInvoiceLineItemInformationAfterTaxesRequest) returns (CreateInvoiceLineItemInformationAfterTaxesResponse);
+  rpc CreateInvoiceTotal(CreateInvoiceTotalRequest) returns (CreateInvoiceTotalResponse);
+  rpc CreateInvoiceAllowanceCharge(CreateInvoiceAllowanceChargeRequest) returns (CreateInvoiceAllowanceChargeResponse);
+  rpc CreateLeviedDutyFeeTax(CreateLeviedDutyFeeTaxRequest) returns (CreateLeviedDutyFeeTaxResponse);
+}
+
+message Invoice {
+  InvoiceD invoice_d = 1;
+  InvoiceT invoice_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message InvoiceD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string country_of_supply_of_goods = 4;
+  string credit_reason_code = 5;
+  string discount_agreement_terms = 6;
+  string invoice_currency_code = 7;
+  string invoice_type = 8;
+  bool is_buyer_based_in_eu = 9;
+  bool is_first_seller_based_in_eu = 10;
+  string supplier_account_receivable = 11;
+  uint32 blanket_order = 12;
+  uint32 buyer = 13;
+  uint32 contract = 14;
+  uint32 delivery_note = 15;
+  uint32 despatch_advice = 16;
+  uint32 dispute_notice = 17;
+  uint32 inventory_location = 18;
+  uint32 inventory_report = 19;
+  uint32 invoice = 20;
+  uint32 invoice_identification = 21;
+  uint32 manifest = 22;
+  uint32 order_response = 23;
+  uint32 payee = 24;
+  uint32 payer = 25;
+  uint32 pickup_from = 26;
+  uint32 price_list = 27;
+  uint32 promotional_deal = 28;
+  uint32 purchase_order = 29;
+  uint32 receiving_advice = 30;
+  uint32 remit_to = 31;
+  uint32 returns_notice = 32;
+  uint32 sales_order = 33;
+  uint32 sales_report = 34;
+  uint32 seller = 35;
+  uint32 ship_from = 36;
+  uint32 ship_to = 37;
+  uint32 supplier_agent_representative = 38;
+  uint32 supplier_corporate_office = 39;
+  uint32 tax_currency_information = 40;
+  uint32 tax_representative = 41;
+  uint32 trade_agreement = 42;
+  uint32 ultimate_consignee = 43;
+}
+
+message InvoiceT {
+  google.protobuf.Timestamp actual_delivery_date = 1;
+  google.protobuf.Timestamp invoicing_period_begin = 2;
+  google.protobuf.Timestamp invoicing_period_end = 3;
+}
+
+message CreateInvoiceRequest {
+  string country_of_supply_of_goods = 1;
+  string credit_reason_code = 2;
+  string discount_agreement_terms = 3;
+  string invoice_currency_code = 4;
+  string invoice_type = 5;
+  bool is_buyer_based_in_eu = 6;
+  bool is_first_seller_based_in_eu = 7;
+  string supplier_account_receivable = 8;
+  string actual_delivery_date = 9;
+  uint32 blanket_order = 10;
+  uint32 buyer = 11;
+  uint32 contract = 12;
+  uint32 delivery_note = 13;
+  uint32 despatch_advice = 14;
+  uint32 dispute_notice = 15;
+  uint32 inventory_location = 16;
+  uint32 inventory_report = 17;
+  uint32 invoice = 18;
+  uint32 invoice_identification = 19;
+  string invoicing_period_begin = 20;
+  string invoicing_period_end = 21;
+  uint32 manifest = 22;
+  uint32 order_response = 23;
+  uint32 payee = 24;
+  uint32 payer = 25;
+  uint32 pickup_from = 26;
+  uint32 price_list = 27;
+  uint32 promotional_deal = 28;
+  uint32 purchase_order = 29;
+  uint32 receiving_advice = 30;
+  uint32 remit_to = 31;
+  uint32 returns_notice = 32;
+  uint32 sales_order = 33;
+  uint32 sales_report = 34;
+  uint32 seller = 35;
+  uint32 ship_from = 36;
+  uint32 ship_to = 37;
+  uint32 supplier_agent_representative = 38;
+  uint32 supplier_corporate_office = 39;
+  uint32 tax_currency_information = 40;
+  uint32 tax_representative = 41;
+  uint32 trade_agreement = 42;
+  uint32 ultimate_consignee = 43;
+  string user_id = 44;
+  string user_email = 45;
+  string request_id = 46;
+  repeated CreateInvoiceLineItemRequest invoice_line_items = 47;
+}
+
+message CreateInvoiceResponse {
+  Invoice invoice = 1;
+}
+
+message GetInvoiceRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetInvoiceResponse {
+  Invoice invoice = 1;
+}
+
+message GetInvoiceByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetInvoiceByPkResponse {
+  Invoice invoice = 1;
+}
+
+message GetInvoicesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetInvoicesResponse {
+  repeated Invoice invoices = 1;
+  string next_cursor = 2;
+}
+
+message UpdateInvoiceRequest {
+  string country_of_supply_of_goods = 1;
+  string credit_reason_code = 2;
+  string discount_agreement_terms = 3;
+  string invoice_currency_code = 4;
+  string invoice_type = 5;
+  string supplier_account_receivable = 6;
+  string id = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message UpdateInvoiceResponse {}
+
+message InvoiceLineItem {
+  InvoiceLineItemD invoice_line_item_d = 1;
+  InvoiceLineItemT invoice_line_item_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message InvoiceLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  double amount_exclusive_allowances_charges = 4;
+  string aeac_code_list_version = 5;
+  string aeac_currency_code = 6;
+  double amount_inclusive_allowances_charges = 7;
+  string aiac_code_list_version = 8;
+  string aiac_currency_code = 9;
+  string credit_line_indicator = 10;
+  string credit_reason = 11;
+  double delivered_quantity = 12;
+  string dq_measurement_unit_code = 13;
+  string dq_code_list_version = 14;
+  bool excluded_from_payment_discount_indicator = 15;
+  string extension = 16;
+  double free_goods_quantity = 17;
+  string fgq_measurement_unit_code = 18;
+  string fgq_code_list_version = 19;
+  double invoiced_quantity = 20;
+  string iq_measurement_unit_code = 21;
+  string iq_code_list_version = 22;
+  double item_price_base_quantity = 23;
+  string ipbq_measurement_unit_code = 24;
+  string ipbq_code_list_version = 25;
+  double item_price_exclusive_allowances_charges = 26;
+  string ipeac_code_list_version = 27;
+  string ipeac_currency_code = 28;
+  double item_price_inclusive_allowances_charges = 29;
+  string ipiac_code_list_version = 30;
+  string ipiac_currency_code = 31;
+  double legally_fixed_retail_price = 32;
+  string lfrp_code_list_version = 33;
+  string lfrp_currency_code = 34;
+  uint32 line_item_number = 35;
+  string margin_scheme_information = 36;
+  string owenrship_prior_to_payment = 37;
+  uint32 parent_line_item_number = 38;
+  double recommended_retail_price = 39;
+  string rrp_code_list_version = 40;
+  string rrp_currency_code = 41;
+  double retail_price_excluding_excise = 42;
+  string rpee_code_list_version = 43;
+  string rpee_currency_code = 44;
+  double total_ordered_quantity = 45;
+  string toq_measurement_unit_code = 46;
+  string toq_code_list_version = 47;
+  uint32 consumption_report = 48;
+  uint32 contract = 49;
+  uint32 delivery_note = 50;
+  uint32 despatch_advice = 51;
+  uint32 energy_quantity = 52;
+  uint32 inventory_location_from = 53;
+  uint32 inventory_location_to = 54;
+  uint32 invoice = 55;
+  uint32 promotional_deal = 56;
+  uint32 purchase_conditions = 57;
+  uint32 purchase_order = 58;
+  uint32 receiving_advice = 59;
+  uint32 returnable_asset_identification = 60;
+  uint32 sales_order = 61;
+  uint32 ship_from = 62;
+  uint32 ship_to = 63;
+  uint32 trade_agreement = 64;
+  uint32 invoice_id = 65;
+}
+
+message InvoiceLineItemT {
+  google.protobuf.Timestamp transfer_of_ownership_date = 1;
+  google.protobuf.Timestamp actual_delivery_date = 2;
+  google.protobuf.Timestamp servicetime_period_line_level_begin = 3;
+  google.protobuf.Timestamp servicetime_period_line_level_end = 4;
+}
+
+message CreateInvoiceLineItemRequest {
+  double amount_exclusive_allowances_charges = 1;
+  string aeac_code_list_version = 2;
+  string aeac_currency_code = 3;
+  double amount_inclusive_allowances_charges = 4;
+  string aiac_code_list_version = 5;
+  string aiac_currency_code = 6;
+  string credit_line_indicator = 7;
+  string credit_reason = 8;
+  double delivered_quantity = 9;
+  string dq_measurement_unit_code = 10;
+  string dq_code_list_version = 11;
+  bool excluded_from_payment_discount_indicator = 12;
+  string extension = 13;
+  double free_goods_quantity = 14;
+  string fgq_measurement_unit_code = 15;
+  string fgq_code_list_version = 16;
+  double invoiced_quantity = 17;
+  string iq_measurement_unit_code = 18;
+  string iq_code_list_version = 19;
+  double item_price_base_quantity = 20;
+  string ipbq_measurement_unit_code = 21;
+  string ipbq_code_list_version = 22;
+  double item_price_exclusive_allowances_charges = 23;
+  string ipeac_code_list_version = 24;
+  string ipeac_currency_code = 25;
+  double item_price_inclusive_allowances_charges = 26;
+  string ipiac_code_list_version = 27;
+  string ipiac_currency_code = 28;
+  double legally_fixed_retail_price = 29;
+  string lfrp_code_list_version = 30;
+  string lfrp_currency_code = 31;
+  uint32 line_item_number = 32;
+  string margin_scheme_information = 33;
+  string owenrship_prior_to_payment = 34;
+  uint32 parent_line_item_number = 35;
+  double recommended_retail_price = 36;
+  string rrp_code_list_version = 37;
+  string rrp_currency_code = 38;
+  double retail_price_excluding_excise = 39;
+  string rpee_code_list_version = 40;
+  string rpee_currency_code = 41;
+  double total_ordered_quantity = 42;
+  string toq_measurement_unit_code = 43;
+  string toq_code_list_version = 44;
+  string transfer_of_ownership_date = 45;
+  string actual_delivery_date = 46;
+  uint32 consumption_report = 47;
+  uint32 contract = 48;
+  uint32 delivery_note = 49;
+  uint32 despatch_advice = 50;
+  uint32 energy_quantity = 51;
+  uint32 inventory_location_from = 52;
+  uint32 inventory_location_to = 53;
+  uint32 invoice = 54;
+  uint32 promotional_deal = 55;
+  uint32 purchase_conditions = 56;
+  uint32 purchase_order = 57;
+  uint32 receiving_advice = 58;
+  uint32 returnable_asset_identification = 59;
+  uint32 sales_order = 60;
+  string servicetime_period_line_level_begin = 61;
+  string servicetime_period_line_level_end = 62;
+  uint32 ship_from = 63;
+  uint32 ship_to = 64;
+  uint32 trade_agreement = 65;
+  uint32 invoice_id = 66;
+  string user_id = 67;
+  string user_email = 68;
+  string request_id = 69;
+}
+
+message CreateInvoiceLineItemResponse {
+  InvoiceLineItem invoice_line_item = 1;
+}
+
+message GetInvoiceLineItemsRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetInvoiceLineItemsResponse {
+  repeated InvoiceLineItem invoice_line_items = 1;
+}
+
+message InvoiceLineItems {
+  repeated InvoiceLineItem invoice_line_items = 1;
+}
+
+message InvoiceTotal {
+  InvoiceTotalD invoice_total_d = 1;
+  InvoiceTotalT invoice_total_t = 2;
+}
+
+message InvoiceTotalD {
+  uint32 id = 1;
+  double base_amount = 2;
+  string ba_code_list_version = 3;
+  string ba_currency_code = 4;
+  double prepaid_amount = 5;
+  string pa_code_list_version = 6;
+  string pa_currency_code = 7;
+  string tax_accounting_currency = 8;
+  double total_amount_invoice_allowances_charges = 9;
+  string taiac_code_list_version = 10;
+  string taiac_currency_code = 11;
+  double total_amount_line_allowances_charges = 12;
+  string talac_code_list_version = 13;
+  string talac_currency_code = 14;
+  double total_economic_value = 15;
+  string tev_code_list_version = 16;
+  string tev_currency_code = 17;
+  double total_goods_value = 18;
+  string tgv_code_list_version = 19;
+  string tgv_currency_code = 20;
+  double total_invoice_amount = 21;
+  string tia_code_list_version = 22;
+  string tia_currency_code = 23;
+  double total_invoice_amount_payable = 24;
+  string tiap_code_list_version = 25;
+  string tiap_currency_code = 26;
+  double total_line_amount_exclusive_allowances_charges = 27;
+  string tlaeac_code_list_version = 28;
+  string tlaeac_currency_code = 29;
+  double total_line_amount_inclusive_allowances_charges = 30;
+  string tlaiac_code_list_version = 31;
+  string tlaiac_currency_code = 32;
+  double total_payment_discount_basis_amount = 33;
+  string tpdba_code_list_version = 34;
+  string tpdba_currency_code = 35;
+  double total_retail_value = 36;
+  string trv_code_list_version = 37;
+  string trv_currency_code = 38;
+  double total_tax_amount = 39;
+  string tta_code_list_version = 40;
+  string tta_currency_code = 41;
+  double total_tax_basis_amount = 42;
+  string ttba_code_list_version = 43;
+  string ttba_currency_code = 44;
+  double total_v_a_t_amount = 45;
+  string tva_code_list_version = 46;
+  string tva_currency_code = 47;
+  uint32 invoice_line_item_id = 48;
+  uint32 invoice_id = 49;
+}
+
+message InvoiceTotalT {
+  google.protobuf.Timestamp prepaid_amount_date = 1;
+}
+
+message CreateInvoiceTotalRequest {
+  double base_amount = 1;
+  string ba_code_list_version = 2;
+  string ba_currency_code = 3;
+  double prepaid_amount = 4;
+  string pa_code_list_version = 5;
+  string pa_currency_code = 6;
+  string tax_accounting_currency = 7;
+  double total_amount_invoice_allowances_charges = 8;
+  string taiac_code_list_version = 9;
+  string taiac_currency_code = 10;
+  double total_amount_line_allowances_charges = 11;
+  string talac_code_list_version = 12;
+  string talac_currency_code = 13;
+  double total_economic_value = 14;
+  string tev_code_list_version = 15;
+  string tev_currency_code = 16;
+  double total_goods_value = 17;
+  string tgv_code_list_version = 18;
+  string tgv_currency_code = 19;
+  double total_invoice_amount = 20;
+  string tia_code_list_version = 21;
+  string tia_currency_code = 22;
+  double total_invoice_amount_payable = 23;
+  string tiap_code_list_version = 24;
+  string tiap_currency_code = 25;
+  double total_line_amount_exclusive_allowances_charges = 26;
+  string tlaeac_code_list_version = 27;
+  string tlaeac_currency_code = 28;
+  double total_line_amount_inclusive_allowances_charges = 29;
+  string tlaiac_code_list_version = 30;
+  string tlaiac_currency_code = 31;
+  double total_payment_discount_basis_amount = 32;
+  string tpdba_code_list_version = 33;
+  string tpdba_currency_code = 34;
+  double total_retail_value = 35;
+  string trv_code_list_version = 36;
+  string trv_currency_code = 37;
+  double total_tax_amount = 38;
+  string tta_code_list_version = 39;
+  string tta_currency_code = 40;
+  double total_tax_basis_amount = 41;
+  string ttba_code_list_version = 42;
+  string ttba_currency_code = 43;
+  double total_v_a_t_amount = 44;
+  string tva_code_list_version = 45;
+  string tva_currency_code = 46;
+  uint32 invoice_line_item_id = 47;
+  uint32 invoice_id = 48;
+  string prepaid_amount_date = 49;
+  string user_id = 50;
+  string user_email = 51;
+  string request_id = 52;
+}
+
+message CreateInvoiceTotalResponse {
+  InvoiceTotal invoice_total = 1;
+}
+
+message InvoiceLineItemInformationAfterTaxes {
+  uint32 id = 1;
+  double amount_exclusive_allowances_charges = 2;
+  string aeac_code_list_version = 3;
+  string aeac_currency_code = 4;
+  double amount_inclusive_allowances_charges = 5;
+  string aiac_code_list_version = 6;
+  string aiac_currency_code = 7;
+  uint32 invoice_id = 8;
+  uint32 invoice_line_item_id = 9;
+}
+
+message CreateInvoiceLineItemInformationAfterTaxesRequest {
+  double amount_exclusive_allowances_charges = 1;
+  string aeac_code_list_version = 2;
+  string aeac_currency_code = 3;
+  double amount_inclusive_allowances_charges = 4;
+  string aiac_code_list_version = 5;
+  string aiac_currency_code = 6;
+  uint32 invoice_id = 7;
+  uint32 invoice_line_item_id = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+}
+
+message CreateInvoiceLineItemInformationAfterTaxesResponse {
+  InvoiceLineItemInformationAfterTaxes invoice_line_item_information_after_taxes = 1;
+}
+
+message InvoiceAllowanceCharge {
+  uint32 id = 1;
+  uint32 levied_duty_fee_tax = 2;
+  uint32 allowance_charge = 3;
+  uint32 invoice_id = 4;
+}
+
+message CreateInvoiceAllowanceChargeRequest {
+  uint32 levied_duty_fee_tax = 1;
+  uint32 allowance_charge = 2;
+  uint32 invoice_id = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateInvoiceAllowanceChargeResponse {
+  InvoiceAllowanceCharge invoice_allowance_charge = 1;
+}
+
+message LeviedDutyFeeTax {
+  LeviedDutyFeeTaxD levied_duty_fee_tax_d = 1;
+  LeviedDutyFeeTaxT levied_duty_fee_tax_t = 2;
+}
+
+message LeviedDutyFeeTaxD {
+  uint32 id = 1;
+  string duty_fee_tax_accounting_currency = 2;
+  string duty_fee_tax_agency_name = 3;
+  double duty_fee_tax_amount = 4;
+  string dfta_code_list_version = 5;
+  string dfta_currency_code = 6;
+  double duty_fee_tax_amount_in_accounting_currency = 7;
+  string dftaiac_code_list_version = 8;
+  string dftaiac_currency_code = 9;
+  double duty_fee_tax_basis_amount = 10;
+  string dftba_code_list_version = 11;
+  string dftba_currency_code = 12;
+  double duty_fee_tax_basis_amount_in_accounting_currency = 13;
+  string dftbaiac_code_list_version = 14;
+  string dftbaiac_currency_code = 15;
+  string duty_fee_tax_category_code = 16;
+  string duty_fee_tax_description = 17;
+  string duty_fee_tax_exemption_description = 18;
+  string duty_fee_tax_exemption_reason = 19;
+  double duty_fee_tax_percentage = 20;
+  string duty_fee_tax_type_code = 21;
+  string extension = 22;
+  uint32 order_line_item_id = 23;
+  uint32 invoice_line_item_id = 24;
+  uint32 invoice_id = 25;
+}
+
+message LeviedDutyFeeTaxT {
+  google.protobuf.Timestamp duty_fee_tax_point_date = 1;
+}
+
+message CreateLeviedDutyFeeTaxRequest {
+  string duty_fee_tax_accounting_currency = 1;
+  string duty_fee_tax_agency_name = 2;
+  double duty_fee_tax_amount = 3;
+  string dfta_code_list_version = 4;
+  string dfta_currency_code = 5;
+  double duty_fee_tax_amount_in_accounting_currency = 6;
+  string dftaiac_code_list_version = 7;
+  string dftaiac_currency_code = 8;
+  double duty_fee_tax_basis_amount = 9;
+  string dftba_code_list_version = 10;
+  string dftba_currency_code = 11;
+  double duty_fee_tax_basis_amount_in_accounting_currency = 12;
+  string dftbaiac_code_list_version = 13;
+  string dftbaiac_currency_code = 14;
+  string duty_fee_tax_category_code = 15;
+  string duty_fee_tax_description = 16;
+  string duty_fee_tax_exemption_description = 17;
+  string duty_fee_tax_exemption_reason = 18;
+  double duty_fee_tax_percentage = 19;
+  string duty_fee_tax_type_code = 20;
+  string extension = 21;
+  uint32 order_line_item_id = 22;
+  uint32 invoice_line_item_id = 23;
+  uint32 invoice_id = 24;
+  string duty_fee_tax_point_date = 25;
+  string user_id = 26;
+  string user_email = 27;
+  string request_id = 28;
+}
+
+message CreateLeviedDutyFeeTaxResponse {
+  LeviedDutyFeeTax levied_duty_fee_tax = 1;
+}

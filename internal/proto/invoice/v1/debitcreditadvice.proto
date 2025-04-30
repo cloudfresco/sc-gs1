@@ -1,0 +1,193 @@
+syntax = "proto3";
+
+package invoice.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-gs1/internal/protogen/invoice/v1";
+
+// The DebitCreditAdviceService service definition.
+service DebitCreditAdviceService {
+  rpc CreateDebitCreditAdvice(CreateDebitCreditAdviceRequest) returns (CreateDebitCreditAdviceResponse);
+  rpc GetDebitCreditAdvices(GetDebitCreditAdvicesRequest) returns (GetDebitCreditAdvicesResponse);
+  rpc GetDebitCreditAdvice(GetDebitCreditAdviceRequest) returns (GetDebitCreditAdviceResponse);
+  rpc GetDebitCreditAdviceByPk(GetDebitCreditAdviceByPkRequest) returns (GetDebitCreditAdviceByPkResponse);
+  rpc UpdateDebitCreditAdvice(UpdateDebitCreditAdviceRequest) returns (UpdateDebitCreditAdviceResponse);
+  rpc CreateDebitCreditAdviceLineItem(CreateDebitCreditAdviceLineItemRequest) returns (CreateDebitCreditAdviceLineItemResponse);
+  rpc GetDebitCreditAdviceLineItems(GetDebitCreditAdviceLineItemsRequest) returns (GetDebitCreditAdviceLineItemsResponse);
+  rpc CreateDebitCreditAdviceLineItemDetail(CreateDebitCreditAdviceLineItemDetailRequest) returns (CreateDebitCreditAdviceLineItemDetailResponse);
+}
+
+message DebitCreditAdvice {
+  DebitCreditAdviceD debit_credit_advice_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message DebitCreditAdviceD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string debit_credit_indicator_code = 4;
+  double total_amount = 5;
+  string ta_code_list_version = 6;
+  string ta_currency_code = 7;
+  uint32 bill_to = 8;
+  uint32 buyer = 9;
+  uint32 carrier = 10;
+  uint32 debit_credit_advice_identification = 11;
+  uint32 seller = 12;
+  uint32 ship_from = 13;
+  uint32 ship_to = 14;
+  uint32 ultimate_consignee = 15;
+}
+
+message CreateDebitCreditAdviceRequest {
+  string debit_credit_indicator_code = 1;
+  double total_amount = 2;
+  string ta_code_list_version = 3;
+  string ta_currency_code = 4;
+  uint32 bill_to = 5;
+  uint32 buyer = 6;
+  uint32 carrier = 7;
+  uint32 debit_credit_advice_identification = 8;
+  uint32 seller = 9;
+  uint32 ship_from = 10;
+  uint32 ship_to = 11;
+  uint32 ultimate_consignee = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+  repeated CreateDebitCreditAdviceLineItemRequest debit_credit_advice_line_items = 16;
+}
+
+message CreateDebitCreditAdviceResponse {
+  DebitCreditAdvice debit_credit_advice = 1;
+}
+
+message GetDebitCreditAdviceRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetDebitCreditAdviceResponse {
+  DebitCreditAdvice debit_credit_advice = 1;
+}
+
+message GetDebitCreditAdviceByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetDebitCreditAdviceByPkResponse {
+  DebitCreditAdvice debit_credit_advice = 1;
+}
+
+message GetDebitCreditAdvicesResponse {
+  repeated DebitCreditAdvice debit_credit_advices = 1;
+  string next_cursor = 2;
+}
+
+message GetDebitCreditAdvicesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message UpdateDebitCreditAdviceRequest {
+  string debit_credit_indicator_code = 1;
+  double total_amount = 2;
+  string ta_code_list_version = 3;
+  string ta_currency_code = 4;
+  string id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message UpdateDebitCreditAdviceResponse {}
+
+message DebitCreditAdviceLineItem {
+  DebitCreditAdviceLineItemD debit_credit_advice_line_item_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message DebitCreditAdviceLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  double adjustment_amount = 4;
+  string aa_code_list_version = 5;
+  string aa_currency_code = 6;
+  string debit_credit_indicator_code = 7;
+  string financial_adjustment_reason_code = 8;
+  uint32 line_item_number = 9;
+  uint32 parent_line_item_number = 10;
+  uint32 debit_credit_advice_id = 11;
+}
+
+message CreateDebitCreditAdviceLineItemRequest {
+  double adjustment_amount = 1;
+  string aa_code_list_version = 2;
+  string aa_currency_code = 3;
+  string debit_credit_indicator_code = 4;
+  string financial_adjustment_reason_code = 5;
+  uint32 line_item_number = 6;
+  uint32 parent_line_item_number = 7;
+  uint32 debit_credit_advice_id = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+}
+
+message CreateDebitCreditAdviceLineItemResponse {
+  DebitCreditAdviceLineItem debit_credit_advice_line_item = 1;
+}
+
+message GetDebitCreditAdviceLineItemsRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetDebitCreditAdviceLineItemsResponse {
+  repeated DebitCreditAdviceLineItem debit_credit_advice_line_items = 1;
+}
+
+message DebitCreditAdviceLineItems {
+  repeated DebitCreditAdviceLineItem debit_credit_advice_line_items = 1;
+}
+
+message DebitCreditAdviceLineItemDetail {
+  uint32 id = 1;
+  double aligned_price = 2;
+  string ap_code_list_version = 3;
+  string ap_currency_code = 4;
+  double invoiced_price = 5;
+  string ip_code_list_version = 6;
+  string ip_currency_code = 7;
+  double quantity = 8;
+  string q_measurement_unit_code = 9;
+  string q_code_list_version = 10;
+  uint32 debit_credit_advice_id = 11;
+  uint32 debit_credit_advice_line_item_id = 12;
+}
+
+message CreateDebitCreditAdviceLineItemDetailRequest {
+  double aligned_price = 1;
+  string ap_code_list_version = 2;
+  string ap_currency_code = 3;
+  double invoiced_price = 4;
+  string ip_code_list_version = 5;
+  string ip_currency_code = 6;
+  double quantity = 7;
+  string q_measurement_unit_code = 8;
+  string q_code_list_version = 9;
+  uint32 debit_credit_advice_id = 10;
+  uint32 debit_credit_advice_line_item_id = 11;
+  string user_id = 12;
+  string user_email = 13;
+  string request_id = 14;
+}
+
+message CreateDebitCreditAdviceLineItemDetailResponse {
+  DebitCreditAdviceLineItemDetail debit_credit_advice_line_item_detail = 1;
+}
