@@ -694,11 +694,19 @@ func (m *ConsumptionReportLineItemD) validate(all bool) error {
 
 	// no validation rules for NetConsumptionAmount
 
+	// no validation rules for NetConsumptionAmountCurrency
+
+	// no validation rules for NetConsumptionAmountValue
+
 	// no validation rules for NCACCodeListVersion
 
 	// no validation rules for NCACCurrencyCode
 
 	// no validation rules for NetPrice
+
+	// no validation rules for NetPriceCurrency
+
+	// no validation rules for NetPriceValue
 
 	// no validation rules for NPCodeListVersion
 
@@ -986,11 +994,15 @@ func (m *CreateConsumptionReportLineItemRequest) validate(all bool) error {
 
 	// no validation rules for NetConsumptionAmount
 
+	// no validation rules for NetConsumptionAmountCurrency
+
 	// no validation rules for NCACCodeListVersion
 
 	// no validation rules for NCACCurrencyCode
 
 	// no validation rules for NetPrice
+
+	// no validation rules for NetPriceCurrency
 
 	// no validation rules for NPCodeListVersion
 

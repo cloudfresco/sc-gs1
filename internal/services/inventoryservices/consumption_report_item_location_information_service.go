@@ -23,16 +23,18 @@ type InventoryService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
+  CurrencyService   *common.CurrencyService
 	inventoryproto.UnimplementedInventoryServiceServer
 }
 
 // NewInventoryService - Create Inventory service
-func NewInventoryService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient) *InventoryService {
+func NewInventoryService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient, currency *common.CurrencyService) *InventoryService {
 	return &InventoryService{
 		log:               log,
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
+    CurrencyService:   currency,
 	}
 }
 

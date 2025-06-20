@@ -29,36 +29,39 @@ message DebitCreditAdviceD {
   bytes uuid4 = 2;
   string id_s = 3;
   string debit_credit_indicator_code = 4;
-  double total_amount = 5;
-  string ta_code_list_version = 6;
-  string ta_currency_code = 7;
-  uint32 bill_to = 8;
-  uint32 buyer = 9;
-  uint32 carrier = 10;
-  uint32 debit_credit_advice_identification = 11;
-  uint32 seller = 12;
-  uint32 ship_from = 13;
-  uint32 ship_to = 14;
-  uint32 ultimate_consignee = 15;
+  int64 total_amount = 5;
+  string total_amount_currency = 6;
+  string total_amount_value = 7;
+  string ta_code_list_version = 8;
+  string ta_currency_code = 9;
+  uint32 bill_to = 10;
+  uint32 buyer = 11;
+  uint32 carrier = 12;
+  uint32 debit_credit_advice_identification = 13;
+  uint32 seller = 14;
+  uint32 ship_from = 15;
+  uint32 ship_to = 16;
+  uint32 ultimate_consignee = 17;
 }
 
 message CreateDebitCreditAdviceRequest {
   string debit_credit_indicator_code = 1;
-  double total_amount = 2;
-  string ta_code_list_version = 3;
-  string ta_currency_code = 4;
-  uint32 bill_to = 5;
-  uint32 buyer = 6;
-  uint32 carrier = 7;
-  uint32 debit_credit_advice_identification = 8;
-  uint32 seller = 9;
-  uint32 ship_from = 10;
-  uint32 ship_to = 11;
-  uint32 ultimate_consignee = 12;
-  string user_id = 13;
-  string user_email = 14;
-  string request_id = 15;
-  repeated CreateDebitCreditAdviceLineItemRequest debit_credit_advice_line_items = 16;
+  string total_amount = 2;
+  string total_amount_currency = 3;
+  string ta_code_list_version = 4;
+  string ta_currency_code = 5;
+  uint32 bill_to = 6;
+  uint32 buyer = 7;
+  uint32 carrier = 8;
+  uint32 debit_credit_advice_identification = 9;
+  uint32 seller = 10;
+  uint32 ship_from = 11;
+  uint32 ship_to = 12;
+  uint32 ultimate_consignee = 13;
+  string user_id = 14;
+  string user_email = 15;
+  string request_id = 16;
+  repeated CreateDebitCreditAdviceLineItemRequest debit_credit_advice_line_items = 17;
 }
 
 message CreateDebitCreditAdviceResponse {
@@ -95,13 +98,14 @@ message GetDebitCreditAdvicesRequest {
 
 message UpdateDebitCreditAdviceRequest {
   string debit_credit_indicator_code = 1;
-  double total_amount = 2;
-  string ta_code_list_version = 3;
-  string ta_currency_code = 4;
-  string id = 5;
-  string user_id = 6;
-  string user_email = 7;
-  string request_id = 8;
+  string total_amount = 2;
+  string total_amount_currency = 3;
+  string ta_code_list_version = 4;
+  string ta_currency_code = 5;
+  string id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
 }
 
 message UpdateDebitCreditAdviceResponse {}

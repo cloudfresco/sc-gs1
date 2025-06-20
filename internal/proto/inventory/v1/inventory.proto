@@ -77,16 +77,20 @@ message ConsumptionReportLineItemD {
   string c_q_measurement_unit_code = 5;
   string c_q_code_list_version = 6;
   uint32 line_item_number = 7;
-  double net_consumption_amount = 8;
-  string n_c_a_c_code_list_version = 9;
-  string n_c_a_c_currency_code = 10;
-  double net_price = 11;
-  string n_p_code_list_version = 12;
-  string n_p_currency_code = 13;
-  uint32 parent_line_item_number = 14;
-  string plan_bucket_size_code = 15;
-  uint32 purchase_conditions = 16;
-  uint32 consumption_report_id = 17;
+  int64 net_consumption_amount = 8;
+  string net_consumption_amount_currency = 9;
+  string net_consumption_amount_value = 10;
+  string n_c_a_c_code_list_version = 11;
+  string n_c_a_c_currency_code = 12;
+  int64 net_price = 13;
+  string net_price_currency = 14;
+  string net_price_value = 15;
+  string n_p_code_list_version = 16;
+  string n_p_currency_code = 17;
+  uint32 parent_line_item_number = 18;
+  string plan_bucket_size_code = 19;
+  uint32 purchase_conditions = 20;
+  uint32 consumption_report_id = 21;
 }
 
 message ConsumptionReportLineItemT {
@@ -99,21 +103,23 @@ message CreateConsumptionReportLineItemRequest {
   string c_q_measurement_unit_code = 2;
   string c_q_code_list_version = 3;
   uint32 line_item_number = 4;
-  double net_consumption_amount = 5;
-  string n_c_a_c_code_list_version = 6;
-  string n_c_a_c_currency_code = 7;
-  double net_price = 8;
-  string n_p_code_list_version = 9;
-  string n_p_currency_code = 10;
-  uint32 parent_line_item_number = 11;
-  string plan_bucket_size_code = 12;
-  string consumption_period_begin = 13;
-  string consumption_period_end = 14;
-  uint32 purchase_conditions = 15;
-  uint32 consumption_report_id = 16;
-  string user_id = 17;
-  string user_email = 18;
-  string request_id = 19;
+  string net_consumption_amount = 5;
+  string net_consumption_amount_currency = 6;
+  string n_c_a_c_code_list_version = 7;
+  string n_c_a_c_currency_code = 8;
+  string net_price = 9;
+  string net_price_currency = 10;
+  string n_p_code_list_version = 11;
+  string n_p_currency_code = 12;
+  uint32 parent_line_item_number = 13;
+  string plan_bucket_size_code = 14;
+  string consumption_period_begin = 15;
+  string consumption_period_end = 16;
+  uint32 purchase_conditions = 17;
+  uint32 consumption_report_id = 18;
+  string user_id = 19;
+  string user_email = 20;
+  string request_id = 21;
 }
 
 message CreateConsumptionReportLineItemResponse {

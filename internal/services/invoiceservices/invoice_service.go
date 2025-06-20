@@ -26,16 +26,18 @@ type InvoiceService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
+  CurrencyService   *common.CurrencyService
 	invoiceproto.UnimplementedInvoiceServiceServer
 }
 
 // NewInvoiceService - Create Invoice service
-func NewInvoiceService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient) *InvoiceService {
+func NewInvoiceService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient, currency *common.CurrencyService) *InvoiceService {
 	return &InvoiceService{
 		log:               log,
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
+    CurrencyService:   currency,
 	}
 }
 

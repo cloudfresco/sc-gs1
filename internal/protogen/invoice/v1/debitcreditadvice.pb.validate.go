@@ -256,6 +256,10 @@ func (m *DebitCreditAdviceD) validate(all bool) error {
 
 	// no validation rules for TotalAmount
 
+	// no validation rules for TotalAmountCurrency
+
+	// no validation rules for TotalAmountValue
+
 	// no validation rules for TaCodeListVersion
 
 	// no validation rules for TaCurrencyCode
@@ -381,6 +385,8 @@ func (m *CreateDebitCreditAdviceRequest) validate(all bool) error {
 	// no validation rules for DebitCreditIndicatorCode
 
 	// no validation rules for TotalAmount
+
+	// no validation rules for TotalAmountCurrency
 
 	// no validation rules for TaCodeListVersion
 
@@ -1460,6 +1466,8 @@ func (m *UpdateDebitCreditAdviceRequest) validate(all bool) error {
 	// no validation rules for DebitCreditIndicatorCode
 
 	// no validation rules for TotalAmount
+
+	// no validation rules for TotalAmountCurrency
 
 	// no validation rules for TaCodeListVersion
 

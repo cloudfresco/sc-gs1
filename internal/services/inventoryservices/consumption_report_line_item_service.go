@@ -23,9 +23,11 @@ cq_measurement_unit_code,
 cq_code_list_version,
 line_item_number,
 net_consumption_amount,
+net_consumption_amount_currency,
 ncac_code_list_version,
 ncac_currency_code,
 net_price,
+net_price_currency,
 np_code_list_version,
 np_currency_code,
 parent_line_item_number,
@@ -46,9 +48,11 @@ updated_at)
   :cq_code_list_version,
   :line_item_number,
   :net_consumption_amount,
+  :net_consumption_amount_currency,
   :ncac_code_list_version,
   :ncac_currency_code,
   :net_price,
+  :net_price_currency,
   :np_code_list_version,
   :np_currency_code,
   :parent_line_item_number,
@@ -71,9 +75,11 @@ updated_at)
   cq_code_list_version,
   line_item_number,
   net_consumption_amount,
+  net_consumption_amount_currency,
   ncac_code_list_version,
   ncac_currency_code,
   net_price,
+  net_price_currency,
   np_code_list_version,
   np_currency_code,
   parent_line_item_number,
@@ -143,13 +149,29 @@ func (invs *InventoryService) ProcessConsumptionReportLineItemRequest(ctx contex
 	consumptionReportLineItemD.NetConsumptionAmount = in.NetConsumptionAmount
 	consumptionReportLineItemD.NCACCodeListVersion = in.NCACCodeListVersion
 	consumptionReportLineItemD.NCACCurrencyCode = in.NCACCurrencyCode
-	consumptionReportLineItemD.NetPrice = in.NetPrice
 	consumptionReportLineItemD.NPCodeListVersion = in.NPCodeListVersion
 	consumptionReportLineItemD.NPCurrencyCode = in.NPCurrencyCode
 	consumptionReportLineItemD.ParentLineItemNumber = in.ParentLineItemNumber
 	consumptionReportLineItemD.PlanBucketSizeCode = in.PlanBucketSizeCode
 	consumptionReportLineItemD.PurchaseConditions = in.PurchaseConditions
 	consumptionReportLineItemD.ConsumptionReportId = in.ConsumptionReportId
+
+	netPriceCurrency, err := invs.CurrencyService.GetCurrency(ctx, in.NetPriceCurrency)
+	if err != nil {
+		invs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	netPriceMinor, err := common.ParseAmountString(in.NetPrice, netPriceCurrency)
+	if err != nil {
+		invs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	consumptionReportLineItemD.NetPriceCurrency = netPriceCurrency.Code
+	consumptionReportLineItemD.NetPrice = netPriceMinor
+	consumptionReportLineItemD.NetPriceString = common.FormatAmountString(netPriceMinor, netPriceCurrency)
+
 
 	consumptionReportLineItemT := inventoryproto.ConsumptionReportLineItemT{}
 	consumptionReportLineItemT.ConsumptionPeriodBegin = common.TimeToTimestamp(consumptionPeriodBegin.UTC().Truncate(time.Second))

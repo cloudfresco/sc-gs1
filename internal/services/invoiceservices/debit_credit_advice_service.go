@@ -21,16 +21,18 @@ type DebitCreditAdviceService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
+  CurrencyService   *common.CurrencyService
 	invoiceproto.UnimplementedDebitCreditAdviceServiceServer
 }
 
 // NewDebitCreditAdviceService - Create DebitCreditAdvice service
-func NewDebitCreditAdviceService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient) *DebitCreditAdviceService {
+func NewDebitCreditAdviceService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient, currency *common.CurrencyService) *DebitCreditAdviceService {
 	return &DebitCreditAdviceService{
 		log:               log,
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
+    CurrencyService:   currency,
 	}
 }
 
