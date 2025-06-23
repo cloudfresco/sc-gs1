@@ -40,8 +40,8 @@ const insertDebitCreditAdviceSQL = `insert into debit_credit_advices
 	    (uuid4,
 debit_credit_indicator_code,
 total_amount,
+total_amount_currency,
 ta_code_list_version,
-ta_currency_code,
 bill_to,
 buyer,
 carrier,
@@ -58,8 +58,8 @@ updated_at)
   values(:uuid4,
 :debit_credit_indicator_code,
 :total_amount,
+:total_amount_currency,
 :ta_code_list_version,
-:ta_currency_code,
 :bill_to,
 :buyer,
 :carrier,
@@ -79,8 +79,8 @@ id,
 uuid4,
 debit_credit_indicator_code,
 total_amount,
+total_amount_currency,
 ta_code_list_version,
-ta_currency_code,
 bill_to,
 buyer,
 carrier,
@@ -96,7 +96,7 @@ created_at,
 updated_at from debit_credit_advices`
 
 // updateDebitCreditAdviceSQL - update DebitCreditAdviceSQL query
-const updateDebitCreditAdviceSQL = `update debit_credit_advices set debit_credit_indicator_code = ?, total_amount = ?, ta_code_list_version = ?, ta_currency_code = ?,  updated_at = ? where uuid4 = ?;`
+const updateDebitCreditAdviceSQL = `update debit_credit_advices set debit_credit_indicator_code = ?, total_amount = ?, ta_code_list_version = ?, updated_at = ? where uuid4 = ?;`
 
 // CreateDebitCreditAdvice - Create DebitCreditAdvice
 func (ds *DebitCreditAdviceService) CreateDebitCreditAdvice(ctx context.Context, in *invoiceproto.CreateDebitCreditAdviceRequest) (*invoiceproto.CreateDebitCreditAdviceResponse, error) {
@@ -117,9 +117,7 @@ func (ds *DebitCreditAdviceService) CreateDebitCreditAdvice(ctx context.Context,
 	}
 
 	debitCreditAdviceD.DebitCreditIndicatorCode = in.DebitCreditIndicatorCode
-	debitCreditAdviceD.TotalAmount = in.TotalAmount
 	debitCreditAdviceD.TaCodeListVersion = in.TaCodeListVersion
-	debitCreditAdviceD.TaCurrencyCode = in.TaCurrencyCode
 	debitCreditAdviceD.BillTo = in.BillTo
 	debitCreditAdviceD.Buyer = in.Buyer
 	debitCreditAdviceD.Carrier = in.Carrier
@@ -128,6 +126,22 @@ func (ds *DebitCreditAdviceService) CreateDebitCreditAdvice(ctx context.Context,
 	debitCreditAdviceD.ShipFrom = in.ShipFrom
 	debitCreditAdviceD.ShipTo = in.ShipTo
 	debitCreditAdviceD.UltimateConsignee = in.UltimateConsignee
+
+  totalAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, in.TotalAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	totalAmountMinor, err := common.ParseAmountString(in.TotalAmount, totalAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	debitCreditAdviceD.TotalAmountCurrency = totalAmountCurrency.Code
+	debitCreditAdviceD.TotalAmount = totalAmountMinor
+	debitCreditAdviceD.TotalAmountString = common.FormatAmountString(totalAmountMinor, totalAmountCurrency)
 
 	crUpdUser := commonproto.CrUpdUser{}
 	crUpdUser.StatusCode = "active"
@@ -268,6 +282,14 @@ func (ds *DebitCreditAdviceService) GetDebitCreditAdvices(ctx context.Context, i
 			ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 			return nil, err
 		}
+	totalAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, debitCreditAdvice.DebitCreditAdviceD.TotalAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	debitCreditAdvice.DebitCreditAdviceD.TotalAmountString = common.FormatAmountString(debitCreditAdvice.DebitCreditAdviceD.TotalAmount, totalAmountCurrency)
+
 		debitCreditAdvices = append(debitCreditAdvices, debitCreditAdvice)
 
 	}
@@ -308,6 +330,14 @@ func (ds *DebitCreditAdviceService) GetDebitCreditAdvice(ctx context.Context, in
 		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 		return nil, err
 	}
+	totalAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, debitCreditAdvice.DebitCreditAdviceD.TotalAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	debitCreditAdvice.DebitCreditAdviceD.TotalAmountString = common.FormatAmountString(debitCreditAdvice.DebitCreditAdviceD.TotalAmount, totalAmountCurrency)
+
 	debitCreditAdviceResponse := invoiceproto.GetDebitCreditAdviceResponse{}
 	debitCreditAdviceResponse.DebitCreditAdvice = debitCreditAdvice
 	return &debitCreditAdviceResponse, nil
@@ -334,6 +364,15 @@ func (ds *DebitCreditAdviceService) GetDebitCreditAdviceByPk(ctx context.Context
 		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 		return nil, err
 	}
+
+	totalAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, debitCreditAdvice.DebitCreditAdviceD.TotalAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	debitCreditAdvice.DebitCreditAdviceD.TotalAmountString = common.FormatAmountString(debitCreditAdvice.DebitCreditAdviceD.TotalAmount, totalAmountCurrency)
+
 	debitCreditAdviceResponse := invoiceproto.GetDebitCreditAdviceByPkResponse{}
 	debitCreditAdviceResponse.DebitCreditAdvice = debitCreditAdvice
 	return &debitCreditAdviceResponse, nil
@@ -380,7 +419,6 @@ func (ds *DebitCreditAdviceService) UpdateDebitCreditAdvice(ctx context.Context,
 			in.DebitCreditIndicatorCode,
 			in.TotalAmount,
 			in.TaCodeListVersion,
-			in.TaCurrencyCode,
 			tn,
 			uuid4byte)
 		if err != nil {

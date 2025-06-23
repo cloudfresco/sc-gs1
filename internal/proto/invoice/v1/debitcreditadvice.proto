@@ -31,17 +31,16 @@ message DebitCreditAdviceD {
   string debit_credit_indicator_code = 4;
   int64 total_amount = 5;
   string total_amount_currency = 6;
-  string total_amount_value = 7;
+  string total_amount_string = 7;
   string ta_code_list_version = 8;
-  string ta_currency_code = 9;
-  uint32 bill_to = 10;
-  uint32 buyer = 11;
-  uint32 carrier = 12;
-  uint32 debit_credit_advice_identification = 13;
-  uint32 seller = 14;
-  uint32 ship_from = 15;
-  uint32 ship_to = 16;
-  uint32 ultimate_consignee = 17;
+  uint32 bill_to = 9;
+  uint32 buyer = 10;
+  uint32 carrier = 11;
+  uint32 debit_credit_advice_identification = 12;
+  uint32 seller = 13;
+  uint32 ship_from = 14;
+  uint32 ship_to = 15;
+  uint32 ultimate_consignee = 16;
 }
 
 message CreateDebitCreditAdviceRequest {
@@ -49,19 +48,18 @@ message CreateDebitCreditAdviceRequest {
   string total_amount = 2;
   string total_amount_currency = 3;
   string ta_code_list_version = 4;
-  string ta_currency_code = 5;
-  uint32 bill_to = 6;
-  uint32 buyer = 7;
-  uint32 carrier = 8;
-  uint32 debit_credit_advice_identification = 9;
-  uint32 seller = 10;
-  uint32 ship_from = 11;
-  uint32 ship_to = 12;
-  uint32 ultimate_consignee = 13;
-  string user_id = 14;
-  string user_email = 15;
-  string request_id = 16;
-  repeated CreateDebitCreditAdviceLineItemRequest debit_credit_advice_line_items = 17;
+  uint32 bill_to = 5;
+  uint32 buyer = 6;
+  uint32 carrier = 7;
+  uint32 debit_credit_advice_identification = 8;
+  uint32 seller = 9;
+  uint32 ship_from = 10;
+  uint32 ship_to = 11;
+  uint32 ultimate_consignee = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+  repeated CreateDebitCreditAdviceLineItemRequest debit_credit_advice_line_items = 16;
 }
 
 message CreateDebitCreditAdviceResponse {
@@ -101,11 +99,10 @@ message UpdateDebitCreditAdviceRequest {
   string total_amount = 2;
   string total_amount_currency = 3;
   string ta_code_list_version = 4;
-  string ta_currency_code = 5;
-  string id = 6;
-  string user_id = 7;
-  string user_email = 8;
-  string request_id = 9;
+  string id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
 }
 
 message UpdateDebitCreditAdviceResponse {}
@@ -120,20 +117,21 @@ message DebitCreditAdviceLineItemD {
   uint32 id = 1;
   bytes uuid4 = 2;
   string id_s = 3;
-  double adjustment_amount = 4;
-  string aa_code_list_version = 5;
-  string aa_currency_code = 6;
-  string debit_credit_indicator_code = 7;
-  string financial_adjustment_reason_code = 8;
-  uint32 line_item_number = 9;
-  uint32 parent_line_item_number = 10;
-  uint32 debit_credit_advice_id = 11;
+  int64 adjustment_amount = 4;
+  string adjustment_amount_currency = 5;
+  string adjustment_amount_string = 6;
+  string aa_code_list_version = 7;
+  string debit_credit_indicator_code = 8;
+  string financial_adjustment_reason_code = 9;
+  uint32 line_item_number = 10;
+  uint32 parent_line_item_number = 11;
+  uint32 debit_credit_advice_id = 12;
 }
 
 message CreateDebitCreditAdviceLineItemRequest {
-  double adjustment_amount = 1;
-  string aa_code_list_version = 2;
-  string aa_currency_code = 3;
+  string adjustment_amount = 1;
+  string adjustment_amount_currency = 2;
+  string aa_code_list_version = 3;
   string debit_credit_indicator_code = 4;
   string financial_adjustment_reason_code = 5;
   uint32 line_item_number = 6;
@@ -162,26 +160,28 @@ message DebitCreditAdviceLineItems {
 
 message DebitCreditAdviceLineItemDetail {
   uint32 id = 1;
-  double aligned_price = 2;
-  string ap_code_list_version = 3;
-  string ap_currency_code = 4;
-  double invoiced_price = 5;
-  string ip_code_list_version = 6;
-  string ip_currency_code = 7;
-  double quantity = 8;
-  string q_measurement_unit_code = 9;
-  string q_code_list_version = 10;
-  uint32 debit_credit_advice_id = 11;
-  uint32 debit_credit_advice_line_item_id = 12;
+  int64 aligned_price = 2;
+  string aligned_price_currency = 3;
+  string aligned_price_string = 4;
+  string ap_code_list_version = 5;
+  int64 invoiced_price = 6;
+  string invoiced_price_currency = 7;
+  string invoiced_price_string = 8;
+  string ip_code_list_version = 9;
+  double quantity = 10;
+  string q_measurement_unit_code = 11;
+  string q_code_list_version = 12;
+  uint32 debit_credit_advice_id = 13;
+  uint32 debit_credit_advice_line_item_id = 14;
 }
 
 message CreateDebitCreditAdviceLineItemDetailRequest {
-  double aligned_price = 1;
-  string ap_code_list_version = 2;
-  string ap_currency_code = 3;
-  double invoiced_price = 4;
-  string ip_code_list_version = 5;
-  string ip_currency_code = 6;
+  string aligned_price = 1;
+  string aligned_price_currency = 2;
+  string ap_code_list_version = 3; 
+  string invoiced_price = 4;
+  string invoiced_price_currency = 5;
+  string ip_code_list_version = 6;
   double quantity = 7;
   string q_measurement_unit_code = 8;
   string q_code_list_version = 9;

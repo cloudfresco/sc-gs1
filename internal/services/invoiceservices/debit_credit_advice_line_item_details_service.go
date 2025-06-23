@@ -12,11 +12,11 @@ import (
 const insertDebitCreditAdviceLineItemDetailSQL = `insert into debit_credit_advice_line_item_details
 	  (
   aligned_price,
+  aligned_price_currency,
   ap_code_list_version,
-  ap_currency_code,
   invoiced_price,
+  invoiced_price_currency,
   ip_code_list_version,
-  ip_currency_code,
   quantity,
   q_measurement_unit_code,
   q_code_list_version,
@@ -24,11 +24,12 @@ const insertDebitCreditAdviceLineItemDetailSQL = `insert into debit_credit_advic
   debit_credit_advice_line_item_id)
       values(
     :aligned_price,
+    :aligned_price_currency,
     :ap_code_list_version,
     :ap_currency_code,
     :invoiced_price,
+    :invoiced_price_currency,
     :ip_code_list_version,
-    :ip_currency_code,
     :quantity,
     :q_measurement_unit_code,
     :q_code_list_version,
@@ -38,9 +39,10 @@ const insertDebitCreditAdviceLineItemDetailSQL = `insert into debit_credit_advic
 /*const selectDebitCreditAdviceLineItemDetailsSQL = `select
   id,
   aligned_price,
+  aligned_price_currency,
   ap_code_list_version,
-  ap_currency_code,
   invoiced_price,
+  invoiced_price_currency,
   ip_code_list_version,
   ip_currency_code,
   quantity,
@@ -71,17 +73,44 @@ func (ds *DebitCreditAdviceService) CreateDebitCreditAdviceLineItemDetail(ctx co
 // ProcessDebitCreditAdviceLineItemDetailRequest - ProcessDebitCreditAdviceLineItemDetailRequest
 func (ds *DebitCreditAdviceService) ProcessDebitCreditAdviceLineItemDetailRequest(ctx context.Context, in *invoiceproto.CreateDebitCreditAdviceLineItemDetailRequest) (*invoiceproto.DebitCreditAdviceLineItemDetail, error) {
 	debitCreditAdviceLineItemDetail := invoiceproto.DebitCreditAdviceLineItemDetail{}
-	debitCreditAdviceLineItemDetail.AlignedPrice = in.AlignedPrice
 	debitCreditAdviceLineItemDetail.ApCodeListVersion = in.ApCodeListVersion
-	debitCreditAdviceLineItemDetail.ApCurrencyCode = in.ApCurrencyCode
-	debitCreditAdviceLineItemDetail.InvoicedPrice = in.InvoicedPrice
 	debitCreditAdviceLineItemDetail.IpCodeListVersion = in.IpCodeListVersion
-	debitCreditAdviceLineItemDetail.IpCurrencyCode = in.IpCurrencyCode
 	debitCreditAdviceLineItemDetail.Quantity = in.Quantity
 	debitCreditAdviceLineItemDetail.QMeasurementUnitCode = in.QMeasurementUnitCode
 	debitCreditAdviceLineItemDetail.QCodeListVersion = in.QCodeListVersion
 	debitCreditAdviceLineItemDetail.DebitCreditAdviceId = in.DebitCreditAdviceId
 	debitCreditAdviceLineItemDetail.DebitCreditAdviceLineItemId = in.DebitCreditAdviceLineItemId
+
+  adjustmentAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, in.AdjustmentAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	adjustmentAmountMinor, err := common.ParseAmountString(in.AdjustmentAmount, adjustmentAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	invoicedPriceCurrency, err := ds.CurrencyService.GetCurrency(ctx, in.InvoicedPriceCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	invoicedPriceMinor, err := common.ParseAmountString(in.InvoicedPrice, invoicedPriceCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	debitCreditAdviceLineItemD.AdjustmentAmountCurrency = adjustmentAmountCurrency.Code
+	debitCreditAdviceLineItemD.AdjustmentAmount = adjustmentAmountMinor
+	debitCreditAdviceLineItemD.AdjustmentAmountString = common.FormatAmountString(adjustmentAmountMinor, adjustmentAmountCurrency)
+	debitCreditAdviceLineItemD.InvoicedPriceCurrency = invoicedPriceCurrency.Code
+	debitCreditAdviceLineItemD.InvoicedPrice = invoicedPriceMinor
+	debitCreditAdviceLineItemD.InvoicedPriceString = common.FormatAmountString(invoicedPriceMinor, invoicedPriceCurrency)
 	return &debitCreditAdviceLineItemDetail, nil
 }
 

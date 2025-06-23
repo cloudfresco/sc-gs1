@@ -18,8 +18,8 @@ const insertDebitCreditAdviceLineItemSQL = `insert into debit_credit_advice_line
 	  (
 	  uuid4,
     adjustment_amount,
+    adjustment_amount_currency,
     aa_code_list_version,
-    aa_currency_code,
     debit_credit_indicator_code,
     financial_adjustment_reason_code,
     line_item_number,
@@ -33,8 +33,8 @@ const insertDebitCreditAdviceLineItemSQL = `insert into debit_credit_advice_line
       values(
     :uuid4,
     :adjustment_amount,
+    :adjustment_amount_currency,
     :aa_code_list_version,
-    :aa_currency_code,
     :debit_credit_indicator_code,
     :financial_adjustment_reason_code,
     :line_item_number,
@@ -50,8 +50,8 @@ const selectDebitCreditAdviceLineItemsSQL = `select
   id,
   uuid4,
   adjustment_amount,
-  aa_code_list_version,
-  aa_currency_code,
+  adjustment_amount_currency,
+  aa_code_list_version, 
   debit_credit_indicator_code,
   financial_adjustment_reason_code,
   line_item_number,
@@ -101,12 +101,27 @@ func (ds *DebitCreditAdviceService) ProcessDebitCreditAdviceLineItemRequest(ctx 
 	}
 	debitCreditAdviceLineItemD.AdjustmentAmount = in.AdjustmentAmount
 	debitCreditAdviceLineItemD.AaCodeListVersion = in.AaCodeListVersion
-	debitCreditAdviceLineItemD.AaCurrencyCode = in.AaCurrencyCode
 	debitCreditAdviceLineItemD.DebitCreditIndicatorCode = in.DebitCreditIndicatorCode
 	debitCreditAdviceLineItemD.FinancialAdjustmentReasonCode = in.FinancialAdjustmentReasonCode
 	debitCreditAdviceLineItemD.LineItemNumber = in.LineItemNumber
 	debitCreditAdviceLineItemD.ParentLineItemNumber = in.ParentLineItemNumber
 	debitCreditAdviceLineItemD.DebitCreditAdviceId = in.DebitCreditAdviceId
+
+	adjustmentAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, in.AdjustmentAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	adjustmentAmountMinor, err := common.ParseAmountString(in.AdjustmentAmount, adjustmentAmountCurrency)
+	if err != nil {
+		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	debitCreditAdviceLineItemD.AdjustmentAmountCurrency = adjustmentAmountCurrency.Code
+	debitCreditAdviceLineItemD.AdjustmentAmount = adjustmentAmountMinor
+	debitCreditAdviceLineItemD.AdjustmentAmountString = common.FormatAmountString(adjustmentAmountMinor, adjustmentAmountCurrency)
 
 	crUpdUser := commonproto.CrUpdUser{}
 	crUpdUser.StatusCode = "active"
@@ -219,6 +234,14 @@ func (ds *DebitCreditAdviceService) GetDebitCreditAdviceLineItems(ctx context.Co
 		crUpdTime.UpdatedAt = common.TimeToTimestamp(debitCreditAdviceLineItemTmp.CrUpdTime.UpdatedAt)
 
 		debitCreditAdviceLineItem := invoiceproto.DebitCreditAdviceLineItem{DebitCreditAdviceLineItemD: debitCreditAdviceLineItemTmp.DebitCreditAdviceLineItemD, CrUpdUser: debitCreditAdviceLineItemTmp.CrUpdUser, CrUpdTime: crUpdTime}
+
+    adjustmentAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmountCurrency)
+	  if err != nil {
+		  ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		  return nil, err
+	  }
+
+	  debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmountString = common.FormatAmountString(debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmount, adjustmentAmountCurrency)
 
 		debitCreditAdviceLineItems = append(debitCreditAdviceLineItems, &debitCreditAdviceLineItem)
 	}

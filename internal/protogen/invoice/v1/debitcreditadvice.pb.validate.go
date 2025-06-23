@@ -258,11 +258,9 @@ func (m *DebitCreditAdviceD) validate(all bool) error {
 
 	// no validation rules for TotalAmountCurrency
 
-	// no validation rules for TotalAmountValue
+	// no validation rules for TotalAmountString
 
 	// no validation rules for TaCodeListVersion
-
-	// no validation rules for TaCurrencyCode
 
 	// no validation rules for BillTo
 
@@ -389,8 +387,6 @@ func (m *CreateDebitCreditAdviceRequest) validate(all bool) error {
 	// no validation rules for TotalAmountCurrency
 
 	// no validation rules for TaCodeListVersion
-
-	// no validation rules for TaCurrencyCode
 
 	// no validation rules for BillTo
 
@@ -1471,8 +1467,6 @@ func (m *UpdateDebitCreditAdviceRequest) validate(all bool) error {
 
 	// no validation rules for TaCodeListVersion
 
-	// no validation rules for TaCurrencyCode
-
 	// no validation rules for Id
 
 	// no validation rules for UserId
@@ -1884,9 +1878,11 @@ func (m *DebitCreditAdviceLineItemD) validate(all bool) error {
 
 	// no validation rules for AdjustmentAmount
 
-	// no validation rules for AaCodeListVersion
+	// no validation rules for AdjustmentAmountCurrency
 
-	// no validation rules for AaCurrencyCode
+	// no validation rules for AdjustmentAmountString
+
+	// no validation rules for AaCodeListVersion
 
 	// no validation rules for DebitCreditIndicatorCode
 
@@ -2004,9 +2000,9 @@ func (m *CreateDebitCreditAdviceLineItemRequest) validate(all bool) error {
 
 	// no validation rules for AdjustmentAmount
 
-	// no validation rules for AaCodeListVersion
+	// no validation rules for AdjustmentAmountCurrency
 
-	// no validation rules for AaCurrencyCode
+	// no validation rules for AaCodeListVersion
 
 	// no validation rules for DebitCreditIndicatorCode
 
@@ -2676,15 +2672,19 @@ func (m *DebitCreditAdviceLineItemDetail) validate(all bool) error {
 
 	// no validation rules for AlignedPrice
 
-	// no validation rules for ApCodeListVersion
+	// no validation rules for AlignedPriceCurrency
 
-	// no validation rules for ApCurrencyCode
+	// no validation rules for AlignedPriceString
+
+	// no validation rules for ApCodeListVersion
 
 	// no validation rules for InvoicedPrice
 
-	// no validation rules for IpCodeListVersion
+	// no validation rules for InvoicedPriceCurrency
 
-	// no validation rules for IpCurrencyCode
+	// no validation rules for InvoicedPriceString
+
+	// no validation rules for IpCodeListVersion
 
 	// no validation rules for Quantity
 
@@ -2803,15 +2803,15 @@ func (m *CreateDebitCreditAdviceLineItemDetailRequest) validate(all bool) error 
 
 	// no validation rules for AlignedPrice
 
-	// no validation rules for ApCodeListVersion
+	// no validation rules for AlignedPriceCurrency
 
-	// no validation rules for ApCurrencyCode
+	// no validation rules for ApCodeListVersion
 
 	// no validation rules for InvoicedPrice
 
-	// no validation rules for IpCodeListVersion
+	// no validation rules for InvoicedPriceCurrency
 
-	// no validation rules for IpCurrencyCode
+	// no validation rules for IpCodeListVersion
 
 	// no validation rules for Quantity
 
