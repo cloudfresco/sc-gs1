@@ -172,7 +172,6 @@ func (invs *InventoryService) ProcessConsumptionReportLineItemRequest(ctx contex
 	consumptionReportLineItemD.NetPrice = netPriceMinor
 	consumptionReportLineItemD.NetPriceString = common.FormatAmountString(netPriceMinor, netPriceCurrency)
 
-
 	consumptionReportLineItemT := inventoryproto.ConsumptionReportLineItemT{}
 	consumptionReportLineItemT.ConsumptionPeriodBegin = common.TimeToTimestamp(consumptionPeriodBegin.UTC().Truncate(time.Second))
 	consumptionReportLineItemT.ConsumptionPeriodEnd = common.TimeToTimestamp(consumptionPeriodEnd.UTC().Truncate(time.Second))

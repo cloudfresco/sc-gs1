@@ -26,7 +26,7 @@ type InvoiceService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
-  CurrencyService   *common.CurrencyService
+	CurrencyService   *common.CurrencyService
 	invoiceproto.UnimplementedInvoiceServiceServer
 }
 
@@ -37,7 +37,7 @@ func NewInvoiceService(log *zap.Logger, dbOpt *common.DBService, redisOpt *commo
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
-    CurrencyService:   currency,
+		CurrencyService:   currency,
 	}
 }
 

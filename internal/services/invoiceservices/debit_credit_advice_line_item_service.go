@@ -235,13 +235,13 @@ func (ds *DebitCreditAdviceService) GetDebitCreditAdviceLineItems(ctx context.Co
 
 		debitCreditAdviceLineItem := invoiceproto.DebitCreditAdviceLineItem{DebitCreditAdviceLineItemD: debitCreditAdviceLineItemTmp.DebitCreditAdviceLineItemD, CrUpdUser: debitCreditAdviceLineItemTmp.CrUpdUser, CrUpdTime: crUpdTime}
 
-    adjustmentAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmountCurrency)
-	  if err != nil {
-		  ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
-		  return nil, err
-	  }
+		adjustmentAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmountCurrency)
+		if err != nil {
+			ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
 
-	  debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmountString = common.FormatAmountString(debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmount, adjustmentAmountCurrency)
+		debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmountString = common.FormatAmountString(debitCreditAdviceLineItem.DebitCreditAdviceLineItemD.AdjustmentAmount, adjustmentAmountCurrency)
 
 		debitCreditAdviceLineItems = append(debitCreditAdviceLineItems, &debitCreditAdviceLineItem)
 	}

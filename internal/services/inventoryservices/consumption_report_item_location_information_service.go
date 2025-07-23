@@ -23,7 +23,7 @@ type InventoryService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
-  CurrencyService   *common.CurrencyService
+	CurrencyService   *common.CurrencyService
 	inventoryproto.UnimplementedInventoryServiceServer
 }
 
@@ -34,7 +34,7 @@ func NewInventoryService(log *zap.Logger, dbOpt *common.DBService, redisOpt *com
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
-    CurrencyService:   currency,
+		CurrencyService:   currency,
 	}
 }
 

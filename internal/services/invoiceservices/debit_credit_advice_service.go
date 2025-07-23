@@ -21,7 +21,7 @@ type DebitCreditAdviceService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
-  CurrencyService   *common.CurrencyService
+	CurrencyService   *common.CurrencyService
 	invoiceproto.UnimplementedDebitCreditAdviceServiceServer
 }
 
@@ -32,7 +32,7 @@ func NewDebitCreditAdviceService(log *zap.Logger, dbOpt *common.DBService, redis
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
-    CurrencyService:   currency,
+		CurrencyService:   currency,
 	}
 }
 
@@ -127,7 +127,7 @@ func (ds *DebitCreditAdviceService) CreateDebitCreditAdvice(ctx context.Context,
 	debitCreditAdviceD.ShipTo = in.ShipTo
 	debitCreditAdviceD.UltimateConsignee = in.UltimateConsignee
 
-  totalAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, in.TotalAmountCurrency)
+	totalAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, in.TotalAmountCurrency)
 	if err != nil {
 		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 		return nil, err
@@ -282,13 +282,13 @@ func (ds *DebitCreditAdviceService) GetDebitCreditAdvices(ctx context.Context, i
 			ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 			return nil, err
 		}
-	totalAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, debitCreditAdvice.DebitCreditAdviceD.TotalAmountCurrency)
-	if err != nil {
-		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
-		return nil, err
-	}
+		totalAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, debitCreditAdvice.DebitCreditAdviceD.TotalAmountCurrency)
+		if err != nil {
+			ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
 
-	debitCreditAdvice.DebitCreditAdviceD.TotalAmountString = common.FormatAmountString(debitCreditAdvice.DebitCreditAdviceD.TotalAmount, totalAmountCurrency)
+		debitCreditAdvice.DebitCreditAdviceD.TotalAmountString = common.FormatAmountString(debitCreditAdvice.DebitCreditAdviceD.TotalAmount, totalAmountCurrency)
 
 		debitCreditAdvices = append(debitCreditAdvices, debitCreditAdvice)
 

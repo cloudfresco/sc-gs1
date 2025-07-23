@@ -3,6 +3,7 @@ package invoiceservices
 import (
 	"context"
 
+	"github.com/cloudfresco/sc-gs1/internal/common"
 	invoiceproto "github.com/cloudfresco/sc-gs1/internal/protogen/invoice/v1"
 
 	"github.com/jmoiron/sqlx"
@@ -81,7 +82,7 @@ func (ds *DebitCreditAdviceService) ProcessDebitCreditAdviceLineItemDetailReques
 	debitCreditAdviceLineItemDetail.DebitCreditAdviceId = in.DebitCreditAdviceId
 	debitCreditAdviceLineItemDetail.DebitCreditAdviceLineItemId = in.DebitCreditAdviceLineItemId
 
-  adjustmentAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, in.AdjustmentAmountCurrency)
+	adjustmentAmountCurrency, err := ds.CurrencyService.GetCurrency(ctx, in.AdjustmentAmountCurrency)
 	if err != nil {
 		ds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 		return nil, err
